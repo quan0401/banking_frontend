@@ -12,7 +12,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:6969/api/v1/signup', { email, password });
+      const response = await axios.post('http://localhost:6969/api/v1/signin', { email, password });
+      console.log(response.data);
       navigate('/home');
     } catch (error) {
       console.error('Error during login:', error);

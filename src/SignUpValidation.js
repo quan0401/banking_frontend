@@ -5,8 +5,8 @@ function Validation(values) {
     const passwordPattern = /.{8,}/;
     const phonePattern = /^\d{10}$/;
   
-    if (!values.name) {
-      errors.name = "Name should not be empty";
+    if (!values.username) {
+      errors.username = "Name should not be empty";
     } 
     // else {
     //   errors.name = null;
