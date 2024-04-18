@@ -13,7 +13,8 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:6969/api/v1/signin', { email, password });
-      console.log(response.data);
+      const userData = response.data;
+      localStorage.setItem('userData', JSON.stringify(userData));
       navigate('/home');
     } catch (error) {
       console.error('Error during login:', error);
