@@ -29,9 +29,11 @@ function Validation(values) {
     // else {
     //   errors.password = null;
     // }
-  
-    if (!values.country) {
-      errors.country = "Country should not be empty";
+    if (!values.cccd) {
+      errors.cccd = "CCCD should not be empty";
+    } 
+    if (!values.homeAddress) {
+      errors.homeAddress = "Address should not be empty";
     } 
     // else {
     //   errors.country = null;

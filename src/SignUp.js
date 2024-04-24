@@ -9,7 +9,8 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [country, setCountry] = useState('');
+  const [homeAddress, setAddress] = useState('');
+  const [cccd, setCccd] = useState('');
   const [phone, setPhone] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
   const [errors, setError] = useState({});
@@ -25,7 +26,7 @@ const Signup = () => {
   };
 
   const handleSignup = async () => {
-    const validationErrors = Validation({ username, email, password, country, phone, profilePicture });
+    const validationErrors = Validation({ username, email, cccd, password, homeAddress, phone, profilePicture });
     if (Object.keys(validationErrors).length !== 0) {
       setError(validationErrors);
       return;
@@ -34,7 +35,7 @@ const Signup = () => {
       setError({ username: "Username is required" });
       return;
     }
-
+    // tra data ve cho backend post qua api
     try {
       const reader = new FileReader();
       reader.readAsDataURL(profilePicture);
@@ -43,8 +44,9 @@ const Signup = () => {
         const userData = {
           username,
           password,
+          cccd,
           email,
-          country,
+          homeAddress,
           phone,
           profilePicture: base64Data
         };
@@ -110,12 +112,22 @@ const Signup = () => {
       <div className="mb-3">
         <input
           type='text'
-          placeholder='Enter Country'
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          placeholder='Enter CCCD'
+          value={cccd}
+          onChange={(e) => setCccd(e.target.value)}
           className="form-control"
         />
-        {errors.country && <p className="text-danger">{errors.country}</p>}
+        {errors.cccd && <p className="text-danger">{errors.cccd}</p>}
+      </div>
+      <div className="mb-3">
+        <input
+          type='text'
+          placeholder='Enter Address'
+          value={homeAddress}
+          onChange={(e) => setAddress(e.target.value)}
+          className="form-control"
+        />
+        {errors.homeAddress && <p className="text-danger">{errors.homeAddress}</p>}
       </div>
       <div className="mb-3">
         <input
