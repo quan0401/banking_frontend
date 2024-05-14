@@ -10,14 +10,17 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:6969/api/v1/signup', { email, password });
+  const handleLogin = async () => { /*
+    try { 
+      const response = await axios.post('http://localhost:6969/api/v1/signin', { email, password });
+      const userData = response.data;
+      localStorage.setItem('userData', JSON.stringify(userData));
       navigate('/home');
     } catch (error) {
       console.error('Error during login:', error);
       setError('Invalid email or password');
-    }
+    } */
+        navigate('/home');
   };
 
   const handleSignUp = () => {

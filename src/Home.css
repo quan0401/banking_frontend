@@ -1,0 +1,121 @@
+body {
+  background: #353353;
+}
+
+.profile-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: "Rubik", sans-serif;
+  justify-content: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 1.5rem !important;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-name {
+  color: #fff;
+  font-size: 36px;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0rem !important;
+  font-weight: bold;
+}
+
+.profile-balance {
+  color: #fff;
+  font-size: 16px;
+}
+
+.confirm-button {
+  padding: 10px 30px;
+  background-color: #ff0066;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+.confirm-button:active {
+  transform: scale(0.9);
+}
+
+/* parallax */
+.parallax {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.parallax .layer {
+  position: absolute;
+}
+
+.parallax .p1 {
+  left: 10%;
+  top: 10%;
+}
+
+.parallax .p2 {
+  left: 25%;
+  top: 30%;
+}
+
+.parallax .p3 {
+  left: 15%;
+  bottom: 30%;
+}
+
+.parallax .p4 {
+  left: 10%;
+  bottom: 10%;
+}
+
+.parallax .p5 {
+  left: 45%;
+  top: 10%;
+}
+
+.parallax .p6 {
+  left: 40%;
+  bottom: 10%;
+}
+
+.parallax .p7 {
+  top: 20%;
+  right: 30%;
+}
+
+.parallax .p8 {
+  right: 30%;
+  bottom: 20%;
+}
+
+.parallax .p9 {
+  right: 10%;
+  top: 10%;
+}
+
+.parallax .p10 {
+  top: 45%;
+  right: 20%;
+}
+
+.parallax .p11 {
+  bottom: 10%;
+  right: 10%;
+}
