@@ -9,6 +9,8 @@ import UserInfo from './UserInfo';
 import User from './User';
 import UserSavings from './userSaving';
 import PrivateRoute from './PrivateRoute';
+import CreateSaving from './createSavingPlan';
+
 
 const App = () => {
   return (
@@ -18,6 +20,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/saving" element={<User />} />
+          <Route path="/createsavingplan" element={<CreateSaving />} />
           <Route path="/usersavings" element={<UserSavings />} />
           <Route
             path="/home"
