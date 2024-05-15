@@ -1,14 +1,14 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { UserProvider, useUser } from './UserContext';
-import Login from './Login';
-import SignUp from './SignUp';
-import Home from './Home';
-import UserInfo from './UserInfo';
-import User from './User';
-import UserSavings from './userSaving';
-import PrivateRoute from './PrivateRoute';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { UserProvider, useUser } from "./UserContext";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Home from "./Home";
+import UserInfo from "./UserInfo";
+import User from "./User";
+import UserSavings from "./userSaving";
+import PrivateRoute from "./PrivateRoute";
 import CreateSaving from "./createSavingPlan";
 const App = () => {
   return (
