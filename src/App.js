@@ -9,7 +9,7 @@ import UserInfo from './UserInfo';
 import User from './User';
 import UserSavings from './userSaving';
 import PrivateRoute from './PrivateRoute';
-
+import CreateSaving from "./createSavingPlan";
 const App = () => {
   return (
     <UserProvider>
@@ -19,9 +19,10 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/saving" element={<User />} />
           <Route path="/usersavings" element={<UserSavings />} />
+          <Route path="/createsavingplan" element={<CreateSaving />} />
           <Route
             path="/home"
-            element={<Home />}  // Using PrivateRoute 
+            element={<Home />} // Using PrivateRoute
           />
           <Route
             path="/userinfo"
