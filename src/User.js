@@ -3,6 +3,7 @@ import "./User.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useUser } from "./UserContext";
+
 const User = () => {
   const { userData } = useUser(); // Get user data from context
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ const User = () => {
   const [option, setOption] = useState("");
   const [homeAddress, setAddress] = useState("");
   const [cccd, setCccd] = useState("");
-  const reader = new FileReader();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(userData);
@@ -29,55 +30,45 @@ const User = () => {
   };
 
   return (
-    <div class="container">
-      <div class="text">
-        <h1>Welcome, {Data.user.username}</h1>
-      </div>
-      <div id="contact-form">
-        <div class="form-row">
-          <div class="input-data">
-            <h3>Your balence now : {Data.user.balance}</h3>
+    <div className="contact1">
+      <div className="container-contact1">
+
+        <form className="contact1-form validate-form">
+          <span className="contact1-form-title">
+            Happy to see you, {Data.user.username}
+          </span>
+
+          <div className="wrap-input1 validate-input" data-validate="Money is required">
+            <input className="input1" type="text" name="savingMoney" id="savingMoney" placeholder="Saving Money"/>
+            <span className="shadow-input1"></span>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="input-data">
-            <input
-              type="text"
-              placeholder="Enter money : "
-              value={savingMoney}
-              onChange={(e) => setSavingMoney(e.target.value)}
-              className="form-control"
-            />
-          </div>
-          <div class="input-data">
-            <div className="savingOption">
-            <select
-              name="savingOption"
-              value={option}
-              onChange={(e) => setOption(e.target.value)}
-            >
+
+          <div className="wrap-input1 validate-input">
+          <select className="input1" name="savingOption" value={option} onChange={(e) => setOption(e.target.value)}>
               <option value="KH0">No limit time</option>
               <option value="KH3">3 months</option>
               <option value="KH6">6 months</option>
             </select>
-            </div>
+            <span className="shadow-input1"></span>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="input-data text">
-          <p>Home address: {Data.user.homeAddress}</p>
-          <p>CCCD: {Data.user.cccd}</p>
-          </div>
-        </div>
-        <form class="form-row submit-btn" onSubmit={handleSubmit}>
-          <div class="input-data">
-            <div className="inner">
-              <button type="submit">Submit</button>
-            </div>
+
+          <span className="contact1-form-content">
+            Home address : {Data.user.homeAddress} <br />
+            CCCD : {Data.user.cccd}
+          </span>
+
+          <div className="container-contact1-form-btn">
+            <button className="contact1-form-btn" id="submitButton" onSubmit={handleSubmit}>
+              <span>
+                Submit
+                <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </span>
+            </button>
           </div>
         </form>
       </div>
-  </div>
+    </div>
+
    
   );
 };
