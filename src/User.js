@@ -6,7 +6,6 @@ import { useUser } from "./UserContext";
 
 const User = () => {
   const { userData } = useUser(); // Get user data from context
-  const [username, setUsername] = useState("");
   const [savingMoney, setSavingMoney] = useState("");
   const [option, setOption] = useState("");
   const [homeAddress, setAddress] = useState("");
@@ -30,43 +29,76 @@ const User = () => {
   };
 
   return (
-    <div className="contact1">
-      <div className="container-contact1">
+    <div className="content">
+    
+      <div className="container">
+        <div className="row align-items-stretch no-gutters contact-wrap">
+          <div className="col-md-12">
+            <div className="form h-100">
+              <h3>Happy to see you, {Data.user.username}</h3>
+              <h4>Your balance now : {Data.user.balance}</h4>
+              <form className="mb-5" method="post" id="contactForm" name="contactForm">
+                <div className="row">
+                  <div classNameName="col-md-6 form-group mb-3">
+                    <label for="" className="col-form-label">Saving Plan Name *</label>
+                    <input type="text" className="form-control" name="name" id="name" placeholder="Your saving plan name" />
+                  </div>
+                  <div className="col-md-6 form-group mb-3">
+                    <label for="" className="col-form-label">Your Option *</label>
+                    <select
+                      type="text" className="form-control" name="savingOption" id="savingOption"  
+                      value={option}
+                      onChange={(e) => setOption(e.target.value)}
+                    >
+                      <option selected>Choose...</option>
+                      <option value="KH0">No limit time</option>
+                      <option value="KH3">3 months</option>
+                      <option value="KH6">6 months</option>
+                    </select>
+                  </div>
+                </div>
 
-        <form className="contact1-form validate-form">
-          <span className="contact1-form-title">
-            Happy to see you, {Data.user.username}
-          </span>
+                <div className="row">
+                  <div className="col-md-12 form-group mb-3">
+                    <label for="budget" className="col-form-label">Your saving money</label>
+                    <input
+                      type="text"
+                      placeholder="Enter money : "
+                      value={savingMoney}
+                      onChange={(e) => setSavingMoney(e.target.value)}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
 
-          <div className="wrap-input1 validate-input" data-validate="Money is required">
-            <input className="input1" type="text" name="savingMoney" id="savingMoney" placeholder="Saving Money"/>
-            <span className="shadow-input1"></span>
+                <div className="row">
+                  <div className="col-md-12 form-group mb-3">
+                    <span>
+                      Your home addess : {Data.user.homeAddress}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-12 form-group mb-3">
+                    <span>
+                      Your CCCD : {Data.user.cccd}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-12 form-group">
+                    <input type="submit" value="Summit" className="btn btn-primary rounded-0 py-2 px-4" onSubmit={handleSubmit} />
+                    <span className="submitting"></span>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-
-          <div className="wrap-input1 validate-input">
-          <select className="input1" name="savingOption" value={option} onChange={(e) => setOption(e.target.value)}>
-              <option value="KH0">No limit time</option>
-              <option value="KH3">3 months</option>
-              <option value="KH6">6 months</option>
-            </select>
-            <span className="shadow-input1"></span>
-          </div>
-
-          <span className="contact1-form-content">
-            Home address : {Data.user.homeAddress} <br />
-            CCCD : {Data.user.cccd}
-          </span>
-
-          <div className="container-contact1-form-btn">
-            <button className="contact1-form-btn" id="submitButton" onSubmit={handleSubmit}>
-              <span>
-                Submit
-                <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
+
     </div>
 
    
