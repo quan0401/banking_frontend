@@ -1,0 +1,21 @@
+{
+  "message": "Welcomeback",
+  "user": {
+    "id": 51,
+    "username": "test",
+    "password": "$2a$10$r3Av1kRjQ.Ot7QVld1ZXT.UiLXSCneOLIkzvhVxInOTP78SaXzS9S",
+    "balance": 100000000,
+    "profilePublicId": "c449d8bf-afe8-4933-b85d-f9a083bf48cd",
+    "email": "c3lttrong.2a5.nmson@gmail.com",
+    "phone": "0382815119",
+    "cccd": "1234567890",
+    "homeAddress": "ktx khu b dhqg",
+    "profilePicture": "http://res.cloudinary.com/dg3fsapzu/image/upload/v1713941411/bank/k82kjv6x8mpfypf3dry2.jpg",
+    "emailVerificationToken": "87bf44f23a82bf00c1c9c9a15c39efd94f84b536",
+    "emailVerified": false,
+    "createdAt": "2024-04-24T06:50:13.000Z",
+    "passwordResetToken": null,
+    "passwordResetExpires": "2024-04-24T06:43:31.000Z",
+    "updatedAt": "2024-04-24T06:50:13.000Z"
+  }
+}

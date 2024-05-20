@@ -1,0 +1,19 @@
+body {
+  background: #353353 !important;
+}
+
+.container {
+  padding: 20px;
+  min-height: 100vh;
+  position: fixed;
+  font-family: "Rubik", sans-serif;
+}
+
+.img-thumbnail {
+  max-height: 200px;
+  border-radius: 50%;
+}
+
+.form-control[disabled] {
+  background-color: white !important;
+}
