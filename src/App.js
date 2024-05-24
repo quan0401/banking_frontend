@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider, useUser } from './UserContext';
 import Login from './Login';
-import SignUp from './SignUp';
 import Home from './Home';
 import UserInfo from './UserInfo';
 import User from './User';
@@ -18,7 +17,6 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/saving" element={<User />} />
           <Route path="/createsavingplan" element={<CreateSaving />} />
           <Route path="/usersavings" element={<UserSavings />} />
