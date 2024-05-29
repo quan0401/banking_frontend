@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [country, setCountry] = useState('');
@@ -25,31 +25,44 @@ const Signup = () => {
   };
 
   const handleSignup = async () => {
-    const validationErrors = Validation({ name, email, password, country, phone, profilePicture });
+    const validationErrors = Validation({ username, email, password, country, phone, profilePicture });
     if (Object.keys(validationErrors).length !== 0) {
       setError(validationErrors);
       return;
     }
+    if (!username) {
+      setError({ username: "Username is required" });
+      return;
+    }
 
     try {
-      const formData = new FormData();
-      formData.append('username', name);
-      formData.append('password', password);
-      formData.append('email', email);
-      formData.append('country', country);
-      formData.append('phone', phone);
-      formData.append('profilePicture', profilePicture);
+      const reader = new FileReader();
+      reader.readAsDataURL(profilePicture);
+      reader.onloadend = async () => {
+        const base64Data = reader.result;
+        const userData = {
+          username,
+          password,
+          email,
+          country,
+          phone,
+          profilePicture: base64Data
+        };
   
-      const response = await axios.post("http://localhost:6969/api/v1/signup", formData);
-      setSignupSuccess(true); // Set signup success
-      setError({}); // Clear any previous errors
-      setSignupError(false); // Clear signup error
-      console.log(response.data);
-      // handle success, redirect or show success message
+        const response = await axios.post("http://localhost:6969/api/v1/signup", userData);
+  
+        setSignupSuccess(true); // Set signup success
+        setError({}); // Clear any previous errors
+        setSignupError(false); // Clear signup error
+        console.log(response.data);
+        // handle success, redirect or show success message
+      };
     } catch (error) {
+      setError({}); // Clear any previous errors
       console.error(error);
       setSignupError(true); // Set signup error
       setSignupSuccess(false); // Set signup success to false
+      
       // handle error, show error message
     }
   };
@@ -67,9 +80,9 @@ const Signup = () => {
       <div className="mb-3">
         <input
           type='text'
-          placeholder='Enter Name'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder='Enter Username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="form-control"
         />
         {errors.name && <p className="text-danger">{errors.name}</p>}
