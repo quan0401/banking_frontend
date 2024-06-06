@@ -23,7 +23,7 @@ const Home: FC = (): ReactElement => {
           savingPlans={savingPlans}
           title={"Saving Plans"}
           subTitle={"Best saving Plans"}
-          category={"recommendations"}
+          // category={"recommendations"}
           type={"home"}
         />
       )}

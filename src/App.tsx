@@ -12,6 +12,8 @@ import { useLocation, useWindowSize } from "react-use";
 import SideBar from "@layout/sidebar/SideBar";
 import { useSidebar } from "@contexts/sidebarContext";
 import Home from "@pages/Home";
+import ProtectedRoute from "@pages/ProtectedRoute";
+import SavingPlanView from "@pages/SavingPlanView";
 
 const App: FC = (): ReactElement => {
   const { width } = useWindowSize();
@@ -25,14 +27,30 @@ const App: FC = (): ReactElement => {
     <ThemeProvider theme={{ theme: theme }}>
       <ThemeStyles />
       {width < 1280 && withSidebar && <AppBar />}
-      <div className={`app ${withSidebar ? "" : "fluid"}`}>
+      <div className={`app ${!withSidebar ? "fluid" : ""}`}>
         {withSidebar && <SideBar />}
         <div className="app_content">
           {width >= 1280 && withSidebar && <AppBar />}
           <div className="main">
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/savingPlan-view/:planId"
+                element={
+                  <ProtectedRoute>
+                    <SavingPlanView />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </div>

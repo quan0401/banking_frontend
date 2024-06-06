@@ -1,5 +1,5 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { FC, ReactElement, useRef, useState } from "react";
+import { FC, ReactElement, useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -14,7 +14,7 @@ export interface ISavingPlansSliderProps {
   savingPlans: ISavingPlanDocument[];
   title: string;
   subTitle: string;
-  category: string;
+  category?: string;
   type: string;
 }
 
@@ -142,7 +142,7 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
           ))}
         </div>
 
-        {!scroll.atEnd && savingPlans.length > 2 && (
+        {!scroll.atEnd && scroll.atStart && savingPlans.length > 2 && (
           <span
             onClick={slideRight}
             className="absolute right-2 flex max-w-4xl cursor-pointer justify-end self-center rounded-full bg-sky-400 sm:right-3 md:right-7 lg:right-0"

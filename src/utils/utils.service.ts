@@ -137,6 +137,10 @@ export const shortenLargeNumbers = (data: number | undefined): string => {
   return millify(data, { precision: 0 });
 };
 
+export const formatLargeNumber = (number: number) => {
+  return number.toLocaleString("de-DE"); // 'de-DE' uses dots as thousand separators
+};
+
 export const rating = (num: number): number => {
   // convert to decimal
   if (num) {

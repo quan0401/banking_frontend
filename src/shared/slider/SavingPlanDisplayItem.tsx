@@ -1,31 +1,20 @@
-import { find } from "lodash";
-import { FC, ReactElement, useEffect, useRef } from "react";
-import { FaPencilAlt, FaRegStar, FaStar } from "react-icons/fa";
+import { FC, ReactElement, useRef } from "react";
+import { FaPencilAlt } from "react-icons/fa";
 import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-import {
-  lowerCase,
-  rating,
-  replaceAmpersandAndDashWithSpace,
-  replaceSpacesWithDash,
-} from "@shared/utils/utils.service";
-import {
-  ISavingPlanCardItems,
-  ISavingPlanDocument,
-} from "@interfaces/features/savingPlan.interface";
+import { formatLargeNumber, shortenLargeNumbers } from "@utils/utils.service";
+import { ISavingPlanCardItems } from "@interfaces/features/savingPlan.interface";
 
 const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
   savingPlan,
   linkTarget,
   showEditIcon,
 }): ReactElement => {
-  const sellerEmail = useRef<string>("");
-  // const title: string = replaceSpacesWithDash(savingPlan.title);
   const navigate: NavigateFunction = useNavigate();
 
   return (
     <div className="rounded w-72">
       <div className="mb-8 flex cursor-pointer flex-col gap-2">
-        <Link to={""}>
+        <Link to={`/savingPlan-view/${savingPlan.id}`}>
           <img
             src={savingPlan.image}
             alt="SavingPlan cover image"
@@ -44,17 +33,11 @@ const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
           )} */}
           <div className="flex w-full justify-between">
             <span className="text-md hover:underline">
-              {linkTarget ? (
-                <Link to={""}>
-                  <strong className="text-sm font-medium md:text-base">
-                    {savingPlan.title}
-                  </strong>
-                </Link>
-              ) : (
+              <Link to={`/savingPlan-view/${savingPlan.id}`}>
                 <strong className="text-sm font-medium md:text-base">
                   {savingPlan.title}
                 </strong>
-              )}
+              </Link>
             </span>
             {showEditIcon && (
               <FaPencilAlt className="mr-2 flex self-center" size={15} />
@@ -62,8 +45,8 @@ const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
           </div>
         </div>
         <div>
-          <Link to={""}>
-            <p className="line-clamp-2 text-sm text-[#404145] hover:underline md:text-base">
+          <Link to={`/savingPlan-view/${savingPlan.id}`}>
+            <p className="line-clamp-2 text-sm hover:underline md:text-base">
               {savingPlan.basicDescription}
             </p>
           </Link>
@@ -85,7 +68,11 @@ const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
         </div> */}
         <div>
           <strong className="text-sm font-bold md:text-base">
-            From {savingPlan.minimumEachTransaction} {savingPlan.currency}
+            From{" "}
+            {formatLargeNumber(
+              parseFloat(`${savingPlan.minimumEachTransaction}`)
+            )}{" "}
+            {savingPlan.currency}
           </strong>
         </div>
       </div>

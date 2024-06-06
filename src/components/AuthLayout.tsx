@@ -8,10 +8,13 @@ import Button from "@shared/button/Button";
 import { authService } from "@services/api/auth/auth.service";
 import { ISignInBody } from "@interfaces/features/auth.interface";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useAppDispatch } from "@redux/store";
+import { addAuthUser } from "@redux/reducers/auth.reducer";
 
 const AuthLayout: FC = (): ReactElement => {
   const { width } = useWindowSize();
   const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [info, setInfo] = useState<ISignInBody>({
     email: "dongminhquan2004@gmail.com",
@@ -26,7 +29,11 @@ const AuthLayout: FC = (): ReactElement => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await authService.signIn(info);
+      const {
+        data: { user },
+      } = await authService.signIn(info);
+      dispatch(addAuthUser({ authInfo: user }));
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -34,7 +41,7 @@ const AuthLayout: FC = (): ReactElement => {
   };
 
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-2">
+    <div className=" flex-1 grid grid-cols-1 lg:grid-cols-2">
       {width >= 1024 && (
         <div className="flex flex-col justify-center items-center lg:p-[60px]">
           <Logo imgClass="w-[60px]" textClass="text-[28px]" />

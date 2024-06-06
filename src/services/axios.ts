@@ -1,4 +1,4 @@
-import axios from "axios";
+import libAxios, { AxiosInstance, AxiosResponse } from "axios";
 
 export let BASE_ENDPOINT = "";
 
@@ -9,8 +9,14 @@ if (APP_ENVIRONMENT === "local") {
 
 const BASE_URL = `${BASE_ENDPOINT}/api/v1`;
 
-export default axios.create({
+const axios: AxiosInstance = libAxios.create({
   baseURL: BASE_URL,
   headers: { "Content-Type": "application/json", Accept: "application/json" },
   withCredentials: true,
 });
+
+axios.interceptors.response.use((res: AxiosResponse): AxiosResponse => {
+  return res;
+});
+
+export default axios;

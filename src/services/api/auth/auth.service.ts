@@ -25,6 +25,16 @@ class AuthService {
     const response = await axios.post(`/reset-password/${token}`, body);
     return response;
   }
+
+  async currentUser(authId: string) {
+    const response = await axios.get(`/auth/currentUser/${authId}`);
+    return response;
+  }
+
+  async signout() {
+    const response = await axios.post(`/signout`);
+    return response;
+  }
 }
 
 export const authService = new AuthService();
