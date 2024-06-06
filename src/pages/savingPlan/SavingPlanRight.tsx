@@ -1,4 +1,5 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
+import Button from "@shared/button/Button";
 import { formatLargeNumber } from "@utils/utils.service";
 import dateFormat from "dateformat";
 import { FC, ReactElement } from "react";
@@ -132,6 +133,9 @@ const SavingPlanRight: FC<ISavingPlanRightProps> = ({
       </div>
 
       <hr className="border-grey my-3" />
+      <div className="w-full mt-10">
+        <Button className="btn btn--primary" label="continue to order" />
+      </div>
     </>
   );
 };

@@ -14,6 +14,7 @@ import { useSidebar } from "@contexts/sidebarContext";
 import Home from "@pages/Home";
 import ProtectedRoute from "@pages/ProtectedRoute";
 import SavingPlanView from "@pages/SavingPlanView";
+import SignUp from "@pages/SignUp";
 
 const App: FC = (): ReactElement => {
   const { width } = useWindowSize();
@@ -21,7 +22,7 @@ const App: FC = (): ReactElement => {
   const { theme } = useTheme();
   const { setOpen } = useSidebar();
   const path = useLocation().pathname;
-  const withSidebar = path !== "/login";
+  const withSidebar = path !== "/login" && path !== "/signup";
 
   return (
     <ThemeProvider theme={{ theme: theme }}>
@@ -34,6 +35,8 @@ const App: FC = (): ReactElement => {
           <div className="main">
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+
               <Route
                 path="/"
                 element={

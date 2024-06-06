@@ -299,3 +299,18 @@ export const downloadFile = (blobUrl: string, fileName: string): void => {
     link.parentNode.removeChild(link);
   }
 };
+
+export const handleFilterError = (
+  field: string,
+  validationErrors: Record<string, string>[]
+): string[] => {
+  const errors: string[] = [];
+
+  for (const error of validationErrors) {
+    if (Object.keys(error)[0] === field) {
+      errors.push(`${error[field]}`);
+    }
+  }
+
+  return errors;
+};
