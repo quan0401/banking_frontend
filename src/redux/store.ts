@@ -19,6 +19,7 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import logoutReducer from "./reducers/logout.reducer";
+import headerReducer from "./reducers/header.reducer";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +29,7 @@ const persistConfig = {
 const combined: Reducer = combineReducers({
   authUser: authReducer,
   logout: logoutReducer,
+  header: headerReducer,
 });
 
 export const rootReducers: Reducer<RootState> = (state, action) => {

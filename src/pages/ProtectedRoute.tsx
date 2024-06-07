@@ -1,5 +1,6 @@
 import { IReduxState } from "@interfaces/store.interface";
-import { useAppSelector } from "@redux/store";
+import { toggleHeader } from "@redux/reducers/header.reducer";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 import { authService } from "@services/api/auth/auth.service";
 import { AxiosResponse } from "axios";
 import { FC, ReactElement, ReactNode, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({
   const authData = useAppSelector((state: IReduxState) => state.authUser);
   const [valid, setValid] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (authData) {
@@ -22,10 +24,12 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({
         .catch((reason: AxiosResponse) => {
           console.log(reason);
           setValid(false);
+          dispatch(toggleHeader(false));
+
           navigate("/login");
         });
     }
-  }, []);
+  }, [authData?.id, navigate]);
 
   return <>{!valid ? <></> : children}</>;
 };

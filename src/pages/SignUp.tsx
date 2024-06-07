@@ -1,35 +1,38 @@
-import { ChangeEvent, FC, FormEvent, ReactElement, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
 import { useWindowSize } from "react-use";
-import media from "@assets/login.webp";
-import Logo from "../components/Logo";
 import Spring from "../components/Spring";
 import TextInput from "@shared/inputs/TextInput";
 import { ISignUpBody } from "@interfaces/features/auth.interface"; // Update this
 import { useNavigate, NavigateFunction } from "react-router-dom";
-import { useAppDispatch } from "@redux/store";
 
 import Button from "@shared/button/Button";
 import { useScheme } from "@hooks/useScheme";
 import { registerUserSchema } from "@utils/schemes/auth.scheme";
 import { handleFilterError } from "@utils/utils.service";
 import { checkImageOrVideo, readAsBase64 } from "@utils/image-utils.service";
-import { set } from "lodash";
-import { addAuthUser } from "@redux/reducers/auth.reducer";
 import { authService } from "@services/api/auth/auth.service";
+import { useAppSelector } from "@redux/store";
+import { IReduxState } from "@interfaces/store.interface";
 
 const SignUp: FC = (): ReactElement => {
-  const { width } = useWindowSize();
   const navigate: NavigateFunction = useNavigate();
-  const dispatch = useAppDispatch();
   const [showError, setShowError] = useState<boolean>(false);
+  const authUser = useAppSelector((state: IReduxState) => state.authUser);
 
   const [info, setInfo] = useState<ISignUpBody>({
-    username: "test0401",
-    password: "quan0401",
-    email: "test@gmail.com",
-    phone: "09385555505",
-    cccd: "079204027608",
-    homeAddress: "52 Nguyen Van Cu, Long Bien, Ha Noi",
+    username: "",
+    password: "",
+    email: "",
+    phone: "",
+    cccd: "",
+    homeAddress: "",
     profilePicture: "",
   });
 
@@ -63,23 +66,29 @@ const SignUp: FC = (): ReactElement => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      schemaValidation();
-      setShowError(true);
-      const {
-        data: { user },
-      } = await authService.signUp(info); // Update this
-      console.log(user);
-      // dispatch(addAuthUser({ authInfo: user }));
-      // navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
+    schemaValidation();
+    setShowError(true);
+    if (validationErrors.length > 0) return;
+    const {
+      data: { user },
+    } = await authService.signUp(info);
+    navigate("/login");
   };
+
+  useEffect(() => {
+    if (authUser?.id) {
+      navigate("/");
+    }
+  }, [authUser]);
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-2">
-      <h1 className="lg:absolute m-20 flex  justify-center">Signup</h1>
+      <div className="lg:absolute m-8 md:m-12  justify-center">
+        <h1 className="cursor-pointer" onClick={() => navigate("/login")}>
+          Login
+        </h1>
+        <h2 className="ml-4 lg:mt-16">Signup</h2>
+      </div>
       <div className="flex flex-col items-center justify-center lg:px-[60px]">
         <Spring className="w-full max-w-[460px]">
           <div className="flex flex-col justify-center">
