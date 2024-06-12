@@ -90,9 +90,9 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
   };
 
   return (
-    <div className="mx-auto my-8 flex flex-col overflow-hidden rounded-lg">
+    <div className="mx-auto mb-8 flex flex-col overflow-hidden rounded-lg">
       {title && (
-        <div className="flex items-start py-6">
+        <div className="flex items-start pb-6">
           <div className="flex w-full flex-col justify-between">
             <div className="flex gap-2">
               <h2 className="text-base font-bold md:text-lg lg:text-2xl">
@@ -128,7 +128,7 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
         )}
         <div className="relative flex gap-x-8 pt-3">
           {savingPlans.map((savingPlan: ISavingPlanDocument) => (
-            <div key={uuidv4()} className="">
+            <div key={uuidv4()} className="hover:opacity-80">
               {type === "home" ? (
                 <SavingPlanCardDisplayItem
                   savingPlan={savingPlan}

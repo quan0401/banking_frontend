@@ -1,115 +1,26 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
+import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 import Button from "@shared/button/Button";
-import { formatLargeNumber } from "@utils/utils.service";
+import SavingPlanFeatures from "@shared/savingPlan/SavingPlanFeatures";
 import dateFormat from "dateformat";
 import { FC, ReactElement } from "react";
-import {
-  FaCalendar,
-  FaMoneyBill,
-  FaRegArrowAltCircleDown,
-  FaRegArrowAltCircleUp,
-  FaTachometerAlt,
-} from "react-icons/fa";
-import { FaCartPlus } from "react-icons/fa6";
+import { FaCalendar } from "react-icons/fa";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface ISavingPlanRightProps {
   savingPlan: ISavingPlanDocument;
+  userSaving: IUserSavingDocument | null;
 }
 
 const SavingPlanRight: FC<ISavingPlanRightProps> = ({
   savingPlan,
+  userSaving,
 }): ReactElement => {
+  const navigate: NavigateFunction = useNavigate();
   return (
     <>
-      <hr className="border-grey my-3" />
-      <h3 className="mb-6">Features</h3>
+      <SavingPlanFeatures savingPlan={savingPlan} />
 
-      <div className="grid  grid-cols-2 gap-y-4 ">
-        <div className="flex flex-col">
-          <span className="text-[#95979d] flex items-center">
-            <FaCartPlus size={20} className="mr-1" />
-            Category
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col">
-            <span className="font-normal">{savingPlan.basicDescription}</span>
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-[#95979d] flex items-center">
-            {" "}
-            <FaMoneyBill size={20} className="mr-1" />
-            From
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col">
-            <span className="font-normal">
-              {formatLargeNumber(
-                parseFloat(`${savingPlan.minimumEachTransaction}`)
-              )}{" "}
-              {`${savingPlan.currency}`}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-[#95979d] flex items-center">
-            {" "}
-            <FaTachometerAlt size={20} className="mr-1" />
-            <p className="line-clamp-1">Maximum each transaction</p>
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col">
-            <span className="font-normal">
-              {formatLargeNumber(
-                parseFloat(`${savingPlan.maximumEachTransaction}`)
-              )}{" "}
-              {`${savingPlan.currency}`}
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-[#95979d] flex items-center">
-            {" "}
-            <FaRegArrowAltCircleUp size={20} className="mr-1" />
-            Interesrate
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col">
-            <span className="font-normal">
-              {formatLargeNumber(parseFloat(`${savingPlan.interestRate}`))}%
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-[#95979d] flex items-center">
-            {" "}
-            <FaRegArrowAltCircleDown size={20} className="mr-1" />
-            <p className="line-clamp-1">Interesrate before due</p>
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex flex-col">
-            <span className="font-normal">
-              {formatLargeNumber(
-                parseFloat(`${savingPlan.interestRateBeforeDueDate}`)
-              )}
-              %
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <hr className="border-grey my-3" />
-
-      <hr className="border-grey my-3" />
       <h3 className="mb-6">Conditions</h3>
 
       <div className="grid  grid-cols-2 gap-y-4">
@@ -133,8 +44,23 @@ const SavingPlanRight: FC<ISavingPlanRightProps> = ({
       </div>
 
       <hr className="border-grey my-3" />
-      <div className="w-full mt-10">
-        <Button className="btn btn--primary" label="continue to order" />
+      <div className="w-full mt-10 flex just gap-4">
+        {userSaving && (
+          <Button
+            onClick={() =>
+              navigate(`/userSaving/${savingPlan.id}`, { state: savingPlan })
+            }
+            className="btn btn--primary"
+            label="See user's plan"
+          />
+        )}
+        <Button
+          onClick={() =>
+            navigate(`/checkout/${savingPlan.id}`, { state: savingPlan })
+          }
+          className="btn btn--primary"
+          label={!userSaving ? "Continue to checkout" : "Top up more"}
+        />
       </div>
     </>
   );

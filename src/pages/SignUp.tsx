@@ -6,7 +6,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useWindowSize } from "react-use";
 import Spring from "../components/Spring";
 import TextInput from "@shared/inputs/TextInput";
 import { ISignUpBody } from "@interfaces/features/auth.interface"; // Update this

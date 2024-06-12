@@ -10,6 +10,7 @@ import { FC, ReactElement, useState, useRef } from "react";
 import Headroom from "react-headroom";
 import { FaBars, FaBell, FaMoon } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useWindowSize } from "react-use";
 
 const AppBar: FC = (): ReactElement => {
@@ -17,6 +18,7 @@ const AppBar: FC = (): ReactElement => {
   const [query, setQuery] = useState<string>("");
   const { toggleTheme } = useTheme();
   const { setOpen } = useSidebar();
+  const navigate: NavigateFunction = useNavigate();
 
   const handleToggleTheme = () => {
     if (toggleTheme) {
@@ -45,6 +47,9 @@ const AppBar: FC = (): ReactElement => {
               }}
             />
           )}
+          <h4 className="cursor-pointer" onClick={() => navigate("/")}>
+            Home
+          </h4>
 
           {width >= 768 && (
             <Search

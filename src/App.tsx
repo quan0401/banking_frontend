@@ -17,6 +17,12 @@ import SavingPlanView from "@pages/SavingPlanView";
 import SignUp from "@pages/SignUp";
 import { useAppSelector } from "@redux/store";
 import { IReduxState } from "@interfaces/store.interface";
+import Checkout from "@pages/Checkout";
+import { ToastContainer } from "react-toastify";
+import { showSuccessToast } from "@utils/utils.service";
+import "react-toastify/dist/ReactToastify.css";
+import UserSavingView from "@pages/UserSavingView";
+import AllUserSavings from "@pages/AllUserSavings";
 
 const App: FC = (): ReactElement => {
   const { width } = useWindowSize();
@@ -28,6 +34,8 @@ const App: FC = (): ReactElement => {
   return (
     <ThemeProvider theme={{ theme: theme }}>
       <ThemeStyles />
+      <ToastContainer className={" text-gray-500"} />
+
       {width < 1280 && withHeader && <AppBar />}
       <div className={`app ${!withHeader ? "fluid" : ""}`}>
         {withHeader && <SideBar />}
@@ -37,7 +45,6 @@ const App: FC = (): ReactElement => {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-
               <Route
                 path="/"
                 element={
@@ -46,12 +53,35 @@ const App: FC = (): ReactElement => {
                   </ProtectedRoute>
                 }
               />
-
               <Route
                 path="/savingPlan-view/:planId"
                 element={
                   <ProtectedRoute>
                     <SavingPlanView />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/checkout/:planId"
+                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/userSaving/:savingPlanId"
+                element={
+                  <ProtectedRoute>
+                    <UserSavingView />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/userSaving/all/view"
+                element={
+                  <ProtectedRoute>
+                    <AllUserSavings />
                   </ProtectedRoute>
                 }
               />

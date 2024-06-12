@@ -3,15 +3,26 @@ import Drawer from "./styles";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Button from "@shared/button/Button";
-import { FaRegMoon } from "react-icons/fa";
+import { FaMoneyBill, FaRegMoon } from "react-icons/fa";
 import Logo from "@components/Logo";
 import { useWindowSize } from "react-use";
 import { useSidebar } from "@contexts/sidebarContext";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { FaBoxesPacking } from "react-icons/fa6";
+
+const routes = [
+  {
+    route: "/userSaving/all/view",
+    title: "View Your Savings",
+    icon: <FaBoxesPacking size={24} />,
+  },
+];
 
 export default function SideBar() {
   const { width } = useWindowSize();
   const isPermanent = width >= 1920;
   const { setOpen, open } = useSidebar();
+  const navigate: NavigateFunction = useNavigate();
 
   const handleSetOpen = (show: boolean) => {
     if (setOpen) {
@@ -37,19 +48,23 @@ export default function SideBar() {
 
         <List>
           <div className="menu">
-            {["DashBoard", "Products", "Statistics", "Balance"].map(
-              (text, index) => (
-                <Button
-                  key={index}
-                  label={
-                    <div className="menu-item flex items-center">
+            {routes.map((route, index) => (
+              <Button
+                key={index}
+                onClick={() => navigate(route.route)}
+                className="hover:opacity-80"
+                label={
+                  <div className="menu-item flex items-center">
+                    {route.icon ? (
+                      route.icon
+                    ) : (
                       <FaRegMoon size={24} className="icon" />
-                      <p className="ml-3 text-xl font-semibold">{text}</p>
-                    </div>
-                  }
-                />
-              )
-            )}
+                    )}
+                    <p className="ml-3 text-xl font-semibold">{route.title}</p>
+                  </div>
+                }
+              />
+            ))}
           </div>
         </List>
         <Divider />

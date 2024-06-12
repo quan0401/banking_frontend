@@ -74,7 +74,11 @@ export const saveToLocalStorage = (key: string, data: string): void => {
 
 export const getDataFromLocalStorage = (key: string): any => {
   const data = window.localStorage.getItem(key) as string;
-  return JSON.parse(data);
+  try {
+    return JSON.parse(data);
+  } catch (error) {
+    return data;
+  }
 };
 
 export const deleteFromLocalStorage = (key: string): void => {

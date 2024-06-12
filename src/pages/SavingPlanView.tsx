@@ -6,10 +6,19 @@ import { savingPlanService } from "@services/api/savingPlan/savingPlan.service";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { AxiosResponse } from "axios";
 import CircularPageLoader from "@shared/CircularPageLoader";
+import { userSavingService } from "@services/api/userSaving/userSaving.service";
+import { useAppSelector } from "@redux/store";
+import { IReduxState } from "@interfaces/store.interface";
+import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 
 const SavingPlanView: FC = (): ReactElement => {
   const { planId } = useParams();
+  const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const [savingPlan, setSavingPlan] = useState<ISavingPlanDocument | null>(
+    null
+  );
+
+  const [userSaving, setUserSaving] = useState<IUserSavingDocument | null>(
     null
   );
 
@@ -21,6 +30,12 @@ const SavingPlanView: FC = (): ReactElement => {
       })
       .catch((err) => {
         console.log(err);
+      });
+
+    userSavingService
+      .getSavingPlan(`${authUser?.id}`, `${planId}`)
+      .then((res) => {
+        setUserSaving(res.data.userSaving);
       });
   }, []);
 
@@ -38,7 +53,10 @@ const SavingPlanView: FC = (): ReactElement => {
               <SavingPlanLeft savingPlan={savingPlan} />
             </div>
             <div className="w-full lg:w-1/2">
-              <SavingPlanRight savingPlan={savingPlan} />
+              <SavingPlanRight
+                savingPlan={savingPlan}
+                userSaving={userSaving}
+              />
             </div>
           </div>
         </>
