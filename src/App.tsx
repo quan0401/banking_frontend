@@ -15,6 +15,7 @@ import Home from "@pages/Home";
 import ProtectedRoute from "@pages/ProtectedRoute";
 import SavingPlanView from "@pages/SavingPlanView";
 import SignUp from "@pages/SignUp";
+import UserInfo from "@pages/UserInfo";
 import { useAppSelector } from "@redux/store";
 import { IReduxState } from "@interfaces/store.interface";
 import Checkout from "@pages/Checkout";
@@ -50,6 +51,14 @@ const App: FC = (): ReactElement => {
                 element={
                   <ProtectedRoute>
                     <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <UserInfo />
                   </ProtectedRoute>
                 }
               />

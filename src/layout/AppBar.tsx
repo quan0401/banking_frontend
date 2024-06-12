@@ -74,6 +74,7 @@ const AppBar: FC = (): ReactElement => {
               <button
                 ref={settingDropDownRef}
                 onClick={() => setOpenSettingDropdown(!openSettingDropdown)}
+                
               >
                 <img
                   src="https://res.cloudinary.com/dg3fsapzu/image/upload/v1717500135/ecommerce/a1b09582-6d00-418d-9c1c-2e9a8e37b26d.jpg"

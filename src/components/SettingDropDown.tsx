@@ -20,7 +20,7 @@ const SettingDropDown: FC = (): ReactElement => {
       <ul className="py-2 text-sm" aria-labelledby="avatarButton">
         <li className="mx-3 mb-1">
           <Link
-            to={""}
+            to="/profile"
             className="block w-full cursor-pointer rounded  px-4s py-2 text-center font-bold  focus:outline-none"
           >
             Profile
