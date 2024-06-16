@@ -133,12 +133,15 @@ export const monthList = (): string[] => {
   ];
 };
 
-export const shortenLargeNumbers = (data: number | undefined): string => {
+export const shortenLargeNumbers = (
+  data: number | undefined,
+  precision: number = 0
+): string => {
   if (data === undefined) {
     return "0";
   }
   // 100,000,000 => 100M
-  return millify(data, { precision: 0 });
+  return millify(data, { precision });
 };
 
 export const formatLargeNumber = (number: number) => {
@@ -229,8 +232,17 @@ export const showErrorToast = (message: string): void => {
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
-    theme: "error",
+    theme: "light",
   });
+};
+
+export const isValidUrl = (string: string): boolean => {
+  try {
+    new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return true;
 };
 
 export const reactQuillUtils = () => {

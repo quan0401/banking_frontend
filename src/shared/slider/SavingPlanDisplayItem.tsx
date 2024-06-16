@@ -1,8 +1,10 @@
-import { FC, ReactElement, useRef } from "react";
+import { FC, ReactElement, useContext } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-import { formatLargeNumber, shortenLargeNumbers } from "@utils/utils.service";
+import { formatLargeNumber } from "@utils/utils.service";
 import { ISavingPlanCardItems } from "@interfaces/features/savingPlan.interface";
+import SavingPlanCard from "@components/SavingPlanCard";
+import { ThemeContext } from "@contexts/themeContext";
 
 const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
   savingPlan,
@@ -10,27 +12,23 @@ const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
   showEditIcon,
 }): ReactElement => {
   const navigate: NavigateFunction = useNavigate();
+  const { savingPlansColor } = useContext(ThemeContext);
 
   return (
-    <div className="rounded w-72">
-      <div className="mb-8 flex cursor-pointer flex-col gap-2">
-        <Link to={`/savingPlan-view/${savingPlan.id}`}>
+    <div className="rounded">
+      <div className="mb-8 flex cursor-pointer flex-col gap-2 bg-contain bg-no-repeat">
+        {/* <Link to={`/savingPlan-view/${savingPlan.id}`}>
           <img
             src={savingPlan.image}
             alt="SavingPlan cover image"
             className="fixed-dimensions rounded-lg object-cover"
-            // className={` aspect-square object-center`}
           />
+        </Link> */}
+        <Link to={`/savingPlan-view/${savingPlan.id}`}>
+          <SavingPlanCard savingPlan={savingPlan} />
         </Link>
+
         <div className="flex items-center gap-2 relative">
-          <img
-            src={savingPlan.image}
-            alt="Profile image"
-            className="h-7 w-8 rounded-full object-cover"
-          />
-          {/* {seller.current === savingPlan.email && (
-            <span className="bottom-0 left-5 absolute w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full"></span>
-          )} */}
           <div className="flex w-full justify-between">
             <span className="text-md hover:underline">
               <Link to={`/savingPlan-view/${savingPlan.id}`}>
@@ -51,21 +49,7 @@ const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
             </p>
           </Link>
         </div>
-        {/* <div className="flex items-center gap-1 text-yellow-400">
-          {parseInt(`${savingPlan.ratingsCount}`) > 0 ? (
-            <FaStar />
-          ) : (
-            <FaRegStar />
-          )}
-          <strong className="text-sm font-bold">
-            (
-            {rating(
-              parseInt(`${savingPlan.ratingSum}`) /
-                parseInt(`${savingPlan.ratingsCount}`)
-            )}
-            )
-          </strong>
-        </div> */}
+
         <div>
           <strong className="text-sm font-bold md:text-base">
             From{" "}

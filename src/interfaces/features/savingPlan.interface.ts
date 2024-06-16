@@ -24,3 +24,10 @@ export interface ISavingPlanCardItems {
   linkTarget: boolean;
   showEditIcon: boolean;
 }
+
+export interface IReduxAddSavingPlan {
+  type?: string;
+  payload: {
+    savingPlans?: ISavingPlanDocument[];
+  };
+}

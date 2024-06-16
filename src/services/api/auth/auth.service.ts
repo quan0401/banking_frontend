@@ -2,6 +2,7 @@ import {
   IResetPassword,
   ISignInBody,
   ISignUpBody,
+  IUpdateProfileBody,
 } from "@interfaces/features/auth.interface";
 import axios from "@services/axios";
 
@@ -13,6 +14,11 @@ class AuthService {
 
   async signIn(body: ISignInBody) {
     const response = await axios.post("/signin", body);
+    return response;
+  }
+
+  async updateInfo(body: IUpdateProfileBody) {
+    const response = await axios.put("/update/info", body);
     return response;
   }
 

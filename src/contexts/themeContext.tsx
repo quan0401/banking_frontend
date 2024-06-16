@@ -9,7 +9,7 @@ import {
 } from "react";
 import { ITheme, IThemeContext } from "../interfaces/contexts.interface";
 
-const ThemeContext = createContext<IThemeContext>({
+export const ThemeContext = createContext<IThemeContext>({
   theme: "light",
 });
 
@@ -17,6 +17,7 @@ const ThemeProvider: FC<{ children: ReactNode }> = ({
   children,
 }): ReactElement => {
   const browserTheme = window.matchMedia("(prefers-color-scheme: light)");
+
   const persisted: string | undefined = JSON.parse(
     `${localStorage.getItem("theme")}`
   );

@@ -21,9 +21,9 @@ const SettingDropDown: FC = (): ReactElement => {
         <li className="mx-3 mb-1">
           <Link
             to="/profile"
-            className="block w-full cursor-pointer rounded  px-4s py-2 text-center font-bold  focus:outline-none"
+            className="block w-full cursor-pointer rounded  px-4s py-2  font-bold  focus:outline-none"
           >
-            Profile
+            View your info
           </Link>
         </li>
 

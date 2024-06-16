@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ISavingPlanDocument } from "./features/savingPlan.interface";
+import { ITransactionDocument } from "./features/transaciontion.interface";
 
 export type ITheme = "dark" | "light";
 
@@ -22,4 +23,9 @@ export interface IPaymentContext {
   amount: number;
   setAmount?: Dispatch<SetStateAction<number>>;
   savingPlan: ISavingPlanDocument;
+}
+
+export interface IHomeContext {
+  savingPlans: ISavingPlanDocument[];
+  transactions: ITransactionDocument[];
 }

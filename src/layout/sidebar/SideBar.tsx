@@ -3,7 +3,7 @@ import Drawer from "./styles";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Button from "@shared/button/Button";
-import { FaMoneyBill, FaRegMoon } from "react-icons/fa";
+import { FaMoneyBill, FaRegMoon, FaUser } from "react-icons/fa";
 import Logo from "@components/Logo";
 import { useWindowSize } from "react-use";
 import { useSidebar } from "@contexts/sidebarContext";
@@ -15,6 +15,16 @@ const routes = [
     route: "/userSaving/all/view",
     title: "View Your Savings",
     icon: <FaBoxesPacking size={24} />,
+  },
+  {
+    route: "/profile",
+    title: "View Your info",
+    icon: <FaUser size={24} />,
+  },
+  {
+    route: "/userSaving/all/view",
+    title: "View all of your savings",
+    icon: <FaMoneyBill size={24} />,
   },
 ];
 

@@ -1,4 +1,5 @@
 import { IReduxState } from "@interfaces/store.interface";
+import { addAuthUser } from "@redux/reducers/auth.reducer";
 import { toggleHeader } from "@redux/reducers/header.reducer";
 import { logout } from "@redux/reducers/logout.reducer";
 import { useAppDispatch, useAppSelector } from "@redux/store";
@@ -20,6 +21,7 @@ const ProtectedRoute: FC<{ children: ReactNode }> = ({
       authService
         .currentUser(`${authData.id}`)
         .then((res: AxiosResponse) => {
+          dispatch(addAuthUser({ authInfo: res.data.user }));
           setValid(true);
         })
         .catch((reason: AxiosResponse) => {

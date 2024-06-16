@@ -1,5 +1,6 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
+import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 import { TimeAgo } from "@utils/timeago.utils";
 import { formatLargeNumber } from "@utils/utils.service";
 import { FC, ReactElement, useState } from "react";
@@ -11,7 +12,7 @@ interface IQuickViewTransactionProps {
   savingPlan: ISavingPlanDocument;
 }
 
-const QuickViewTransaction: FC<IQuickViewTransactionProps> = ({
+const HomeQuickViewTransaction: FC<IQuickViewTransactionProps> = ({
   transaction,
   savingPlan,
 }): ReactElement => {
@@ -25,13 +26,16 @@ const QuickViewTransaction: FC<IQuickViewTransactionProps> = ({
       >
         <button className="flex items-center">
           {toggleDropdown ? <FaAngleUp /> : <FaAngleDown />}
-          <div className="ml-4 flex flex-col">
+          <div className="ml-4 flex flex-col items-start">
             <p className="font-bold text-lg flex items-center justify-between">
               {transaction.transactionType === 1 ? "Top Up" : "Withdraw"}{" "}
               <FaCirclePlus className="text-green" />
             </p>
             <p className="line-clamp-1 text-gray">
               {TimeAgo.dayWithTime(`${transaction.transactionDate}`)}
+            </p>
+            <p className="line-clamp-1 text-gray">
+              {savingPlan.title} | {savingPlan.interestRate}%
             </p>
           </div>
         </button>
@@ -62,6 +66,7 @@ const QuickViewTransaction: FC<IQuickViewTransactionProps> = ({
               <p className="text-gray font-bold line-clamp-1">ID</p>
               <p className="font-semibold line-clamp-1">{transaction.id}</p>
             </div>
+
             <div className="flex justify-between">
               <p className="text-gray font-bold line-clamp-1">Date</p>
               <p className="font-semibold line-clamp-1">
@@ -98,4 +103,4 @@ const QuickViewTransaction: FC<IQuickViewTransactionProps> = ({
   );
 };
 
-export default QuickViewTransaction;
+export default HomeQuickViewTransaction;

@@ -1,9 +1,10 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { FC, ReactElement, useEffect, useRef, useState } from "react";
+import { FC, ReactElement, useContext, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import SavingPlanCardDisplayItem from "./SavingPlanDisplayItem";
+import { HomeContext } from "@contexts/homeContext";
 
 interface IScrollProps {
   atStart: boolean;
@@ -11,7 +12,6 @@ interface IScrollProps {
 }
 
 export interface ISavingPlansSliderProps {
-  savingPlans: ISavingPlanDocument[];
   title: string;
   subTitle: string;
   category?: string;
@@ -19,12 +19,12 @@ export interface ISavingPlansSliderProps {
 }
 
 const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
-  savingPlans,
   title,
   subTitle,
   category,
   type,
 }): ReactElement => {
+  const { savingPlans } = useContext(HomeContext);
   const navElement = useRef<HTMLDivElement | null>(null);
   const [scroll, setScroll] = useState<IScrollProps>({
     atStart: true,

@@ -1,5 +1,5 @@
 import Login from "@pages/Login";
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // styles
@@ -10,7 +10,6 @@ import { useTheme } from "@contexts/themeContext";
 import AppBar from "@layout/AppBar";
 import { useWindowSize } from "react-use";
 import SideBar from "@layout/sidebar/SideBar";
-import { useSidebar } from "@contexts/sidebarContext";
 import Home from "@pages/Home";
 import ProtectedRoute from "@pages/ProtectedRoute";
 import SavingPlanView from "@pages/SavingPlanView";
@@ -20,7 +19,6 @@ import { useAppSelector } from "@redux/store";
 import { IReduxState } from "@interfaces/store.interface";
 import Checkout from "@pages/Checkout";
 import { ToastContainer } from "react-toastify";
-import { showSuccessToast } from "@utils/utils.service";
 import "react-toastify/dist/ReactToastify.css";
 import UserSavingView from "@pages/UserSavingView";
 import AllUserSavings from "@pages/AllUserSavings";
@@ -28,9 +26,7 @@ import AllUserSavings from "@pages/AllUserSavings";
 const App: FC = (): ReactElement => {
   const { width } = useWindowSize();
   const withHeader = useAppSelector((state: IReduxState) => state.header);
-
   const { theme } = useTheme();
-  const { setOpen } = useSidebar();
 
   return (
     <ThemeProvider theme={{ theme: theme }}>

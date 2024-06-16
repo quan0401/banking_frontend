@@ -22,6 +22,7 @@ import {
   saveToLocalStorage,
   showSuccessToast,
 } from "@utils/utils.service";
+import SavingPlanCard from "@components/SavingPlanCard";
 
 const Checkout: FC = (): ReactElement => {
   const [savingPlan, setSavingPlan] = useState<ISavingPlanDocument | null>(
@@ -36,6 +37,7 @@ const Checkout: FC = (): ReactElement => {
     atm: false,
     visa: false,
   });
+
   const navigate: NavigateFunction = useNavigate();
   const orderId = queryParams.get("orderId");
 
@@ -46,15 +48,55 @@ const Checkout: FC = (): ReactElement => {
       bankAccountId: "momo",
     } as IMakePaymentPayload);
     const transactionId = res.data.transaction.id;
+    const orderId = res.data.result.orderId;
     saveToLocalStorage("transactionId", transactionId);
-    window.location.href = res.data.result.shortLink;
+
+    navigate(location.pathname + `?orderId=${orderId}`);
+    // window.location.href = res.data.result.shortLink;
   };
 
   useEffect(() => {
+    // handle popstate is for handling back navigation from the payment page, it fix the issue of the useEffect doesn't run when the user navigates back
     savingPlanService.getById(`${planId}`).then((res) => {
       setSavingPlan(res.data.savingPlan);
     });
+
+    const handlePopState = () => {
+      // Logic to handle back navigation
+      // You might want to trigger your useEffect logic again here
+      // For example, refetch data or reset states
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
   }, []);
+
+  // TODO: this works but something wrong with momo payment
+  // useEffect(() => {
+  //   const transactionId = getDataFromLocalStorage("transactionId");
+  // if (orderId && transactionId) {
+  //   transactionService
+  //     .checkPaymentStatus({
+  //       orderId: `${orderId}`,
+  //       savingPlanId: `${planId}`,
+  //       transactionId: `${transactionId}`,
+  //     })
+  //     .then((res) => {
+  //       if (res.data.resultCode === 0) {
+  //         showSuccessToast("Payment successful");
+  //         navigate(`/userSaving/${planId}`);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   deleteFromLocalStorage("transactionId");
+  // }
+  // }, [orderId]);
 
   useEffect(() => {
     const transactionId = getDataFromLocalStorage("transactionId");
@@ -66,6 +108,7 @@ const Checkout: FC = (): ReactElement => {
           transactionId: `${transactionId}`,
         })
         .then((res) => {
+          console.log("res.data.resultCode", res.data.resultCode);
           if (res.data.resultCode === 0) {
             showSuccessToast("Payment successful");
             navigate(`/userSaving/${planId}`);
@@ -91,13 +134,11 @@ const Checkout: FC = (): ReactElement => {
             <div className="md:flex">
               <div className="w-full p-4 md:w-1/3">
                 <div className="pt-3 pb-4 px-4 mb-2 flex flex-col border-b">
-                  <img
+                  {/* <img
                     className="object-contain rounded-md max-h-30 max-w-[320px]"
                     src={savingPlan.image}
-                  />
-                  <h4 className="font-bold text-sm  mt-2 md:pl-4 md:mt-0">
-                    {savingPlan.title}
-                  </h4>
+                  /> */}
+                  <SavingPlanCard savingPlan={savingPlan} />
                 </div>
                 <SavingPlanFeatures savingPlan={savingPlan} />
                 <TotalCheckout />

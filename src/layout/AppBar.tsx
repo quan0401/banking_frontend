@@ -3,6 +3,8 @@ import SettingDropDown from "@components/SettingDropDown";
 import { useSidebar } from "@contexts/sidebarContext";
 import { useTheme } from "@contexts/themeContext";
 import useDetectOutsideClick from "@hooks/useDetectOutsideClick";
+import { IReduxState } from "@interfaces/store.interface";
+import { useAppSelector } from "@redux/store";
 import Button from "@shared/button/Button";
 import CustomTooltip from "@shared/tooltip/CustomToolTip";
 import { FC, ReactElement, useState, useRef } from "react";
@@ -10,7 +12,7 @@ import { FC, ReactElement, useState, useRef } from "react";
 import Headroom from "react-headroom";
 import { FaBars, FaBell, FaMoon } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import { useWindowSize } from "react-use";
 
 const AppBar: FC = (): ReactElement => {
@@ -19,6 +21,7 @@ const AppBar: FC = (): ReactElement => {
   const { toggleTheme } = useTheme();
   const { setOpen } = useSidebar();
   const navigate: NavigateFunction = useNavigate();
+  const userInfo = useAppSelector((state: IReduxState) => state.authUser);
 
   const handleToggleTheme = () => {
     if (toggleTheme) {
@@ -47,9 +50,9 @@ const AppBar: FC = (): ReactElement => {
               }}
             />
           )}
-          <h4 className="cursor-pointer" onClick={() => navigate("/")}>
+          <Link to="/" className="h4">
             Home
-          </h4>
+          </Link>
 
           {width >= 768 && (
             <Search
@@ -74,10 +77,9 @@ const AppBar: FC = (): ReactElement => {
               <button
                 ref={settingDropDownRef}
                 onClick={() => setOpenSettingDropdown(!openSettingDropdown)}
-                
               >
                 <img
-                  src="https://res.cloudinary.com/dg3fsapzu/image/upload/v1717500135/ecommerce/a1b09582-6d00-418d-9c1c-2e9a8e37b26d.jpg"
+                  src={`${userInfo?.profilePicture}`}
                   alt="profile"
                   className="h-7 w-7 rounded-full object-cover"
                 />

@@ -1,6 +1,5 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
-import { round } from "lodash";
 
 /**
  *
@@ -49,12 +48,29 @@ export const calculateCompoundInterestToCurrentDate = (
 
 export const calculateBaseOnTransactions = (
   transactions: ITransactionDocument[],
-  savingPlan: ISavingPlanDocument
+  savingPlans: ISavingPlanDocument | ISavingPlanDocument[]
 ): number => {
   let compounds: number = 0;
-  if (transactions?.length && savingPlan) {
+  let beforeCompounds: number = 0;
+  if (!Array.isArray(savingPlans)) {
     transactions.forEach((transaction) => {
       if (transaction.isSuccessful === 1) {
+        beforeCompounds += transaction.amount as number;
+        compounds += calculateCompoundInterestToCurrentDate(
+          transaction.amount as number,
+          (savingPlans.interestRate as number) / 100,
+          1,
+          `${transaction.transactionDate}`
+        );
+      }
+    });
+  } else {
+    transactions.forEach((transaction) => {
+      if (transaction.isSuccessful === 1) {
+        const savingPlan = savingPlans.find(
+          (plan) => plan.id === transaction.savingPlanId
+        ) as ISavingPlanDocument;
+        beforeCompounds += transaction.amount as number;
         compounds += calculateCompoundInterestToCurrentDate(
           transaction.amount as number,
           (savingPlan.interestRate as number) / 100,

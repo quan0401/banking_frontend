@@ -1,20 +1,17 @@
+import { HomeContext } from "@contexts/homeContext";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 
 interface IHomeProps {
-  savingPlans: ISavingPlanDocument[];
   title: string;
   subTitle: string;
   category?: string;
 }
 
-const HomeUserSavingsView: FC<IHomeProps> = ({
-  savingPlans,
-  title,
-  subTitle,
-  category,
-}) => {
+const HomeUserSavingsView: FC<IHomeProps> = ({ title, subTitle, category }) => {
+  const { savingPlans } = useContext(HomeContext);
+
   return (
     <div className="border-grey mx-auto my-8 flex flex-col overflow-hidden rounded-lg border">
       <div className="flex items-center px-6 py-6 sm:items-start">
