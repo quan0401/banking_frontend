@@ -30,8 +30,10 @@ const ThemeProvider: FC<{ children: ReactNode }> = ({
     localStorage.setItem("theme", JSON.stringify(theme));
   };
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+  const toggleTheme = (newTheme?: ITheme) => {
+    if (!newTheme) {
+      setTheme(theme === "light" ? "dark" : "light");
+    } else setTheme(newTheme);
   };
 
   useEffect(() => {

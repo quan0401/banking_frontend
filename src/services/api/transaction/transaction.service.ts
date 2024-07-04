@@ -29,6 +29,18 @@ class TransactionService {
     const response = await axios.get(`/transaction/all`);
     return response;
   }
+
+  async getAllOfUserById(userId: string) {
+    const response = await axios.get(`/transaction/user/${userId}`);
+    return response;
+  }
+
+  async getTransactionsByDate(startDate: Date, endDate: Date) {
+    const response = await axios.get(
+      `/transaction/byDate/${startDate}/${endDate}`
+    );
+    return response;
+  }
 }
 
 export const transactionService = new TransactionService();

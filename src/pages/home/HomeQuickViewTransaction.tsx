@@ -1,10 +1,9 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
-import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 import { TimeAgo } from "@utils/timeago.utils";
 import { formatLargeNumber } from "@utils/utils.service";
 import { FC, ReactElement, useState } from "react";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp, FaCircle } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 
 interface IQuickViewTransactionProps {
@@ -17,7 +16,6 @@ const HomeQuickViewTransaction: FC<IQuickViewTransactionProps> = ({
   savingPlan,
 }): ReactElement => {
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
-
   return (
     <div>
       <div
@@ -29,13 +27,14 @@ const HomeQuickViewTransaction: FC<IQuickViewTransactionProps> = ({
           <div className="ml-4 flex flex-col items-start">
             <p className="font-bold text-lg flex items-center justify-between">
               {transaction.transactionType === 1 ? "Top Up" : "Withdraw"}{" "}
-              <FaCirclePlus className="text-green" />
+              <FaCirclePlus className="text-green ml-2" />
             </p>
             <p className="line-clamp-1 text-gray">
               {TimeAgo.dayWithTime(`${transaction.transactionDate}`)}
             </p>
-            <p className="line-clamp-1 text-gray">
+            <p className="line-clamp-1 text-gray flex items-center gap-2">
               {savingPlan.title} | {savingPlan.interestRate}%
+              <FaCircle color={savingPlan.image} />
             </p>
           </div>
         </button>

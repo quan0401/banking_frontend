@@ -1,11 +1,6 @@
 import { Collapse } from "@mui/material";
 import { FC, ReactElement, useState } from "react";
-import {
-  FaAngleUp,
-  FaAngleDown,
-  FaPlaneArrival,
-  FaCashRegister,
-} from "react-icons/fa";
+import { FaAngleUp, FaAngleDown, FaCashRegister } from "react-icons/fa";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";

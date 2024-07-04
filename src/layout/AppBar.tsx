@@ -12,7 +12,7 @@ import { FC, ReactElement, useState, useRef } from "react";
 import Headroom from "react-headroom";
 import { FaBars, FaBell, FaMoon } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useWindowSize } from "react-use";
 
 const AppBar: FC = (): ReactElement => {
@@ -20,7 +20,6 @@ const AppBar: FC = (): ReactElement => {
   const [query, setQuery] = useState<string>("");
   const { toggleTheme } = useTheme();
   const { setOpen } = useSidebar();
-  const navigate: NavigateFunction = useNavigate();
   const userInfo = useAppSelector((state: IReduxState) => state.authUser);
 
   const handleToggleTheme = () => {

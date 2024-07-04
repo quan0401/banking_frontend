@@ -1,7 +1,5 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { formatLargeNumber, shortenLargeNumbers } from "@utils/utils.service";
-import React, { FC, ReactElement } from "react";
-import dateFormat from "dateformat";
+import { FC, ReactElement } from "react";
 import SavingPlanCard from "@components/SavingPlanCard";
 
 interface ISavingPlanLeftProps {

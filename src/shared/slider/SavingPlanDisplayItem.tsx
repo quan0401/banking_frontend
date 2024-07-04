@@ -1,19 +1,14 @@
-import { FC, ReactElement, useContext } from "react";
+import { FC, ReactElement } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatLargeNumber } from "@utils/utils.service";
 import { ISavingPlanCardItems } from "@interfaces/features/savingPlan.interface";
 import SavingPlanCard from "@components/SavingPlanCard";
-import { ThemeContext } from "@contexts/themeContext";
 
 const SavingPlanCardDisplayItem: FC<ISavingPlanCardItems> = ({
   savingPlan,
-  linkTarget,
   showEditIcon,
 }): ReactElement => {
-  const navigate: NavigateFunction = useNavigate();
-  const { savingPlansColor } = useContext(ThemeContext);
-
   return (
     <div className="rounded">
       <div className="mb-8 flex cursor-pointer flex-col gap-2 bg-contain bg-no-repeat">

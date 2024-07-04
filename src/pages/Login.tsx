@@ -10,7 +10,7 @@ import { useWindowSize } from "react-use";
 import media from "@assets/login.webp";
 import TextInput from "@shared/inputs/TextInput";
 import Button from "@shared/button/Button";
-import { authService } from "@services/api/auth/auth.service";
+import { authService } from "@services/axios";
 import { ISignInBody } from "@interfaces/features/auth.interface";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@redux/store";
@@ -19,6 +19,8 @@ import Logo from "@components/Logo";
 import Spring from "@components/Spring";
 import { IReduxState } from "@interfaces/store.interface";
 import { toggleHeader } from "@redux/reducers/header.reducer";
+import { showErrorToast } from "@utils/utils.service";
+import { isAxiosError } from "axios";
 
 const Login: FC = (): ReactElement => {
   const { width } = useWindowSize();
@@ -46,7 +48,11 @@ const Login: FC = (): ReactElement => {
       dispatch(toggleHeader(true));
       navigate("/");
     } catch (error) {
-      console.log(error);
+      if (isAxiosError(error)) {
+        showErrorToast(error.response?.data.message);
+      } else {
+        showErrorToast("Error");
+      }
     }
   };
 

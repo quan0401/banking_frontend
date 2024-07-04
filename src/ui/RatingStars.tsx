@@ -20,10 +20,6 @@ const StyledRating = styled(Rating)`
     color: var(--yellow);
   }
 `;
-interface IRatingStarsProps {
-  rating?: number;
-  readOnly?: boolean;
-}
 
 const RatingStars = ({ rating = 0, readOnly = true, ...props }) => {
   return (

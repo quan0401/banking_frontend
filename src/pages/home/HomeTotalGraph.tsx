@@ -2,8 +2,6 @@ import { HomeContext } from "@contexts/homeContext";
 import { useTheme } from "@contexts/themeContext";
 import { calculateBaseOnTransactions } from "@utils/calculator.service";
 import {
-  COLORS,
-  formatTooltipValue,
   handleDataForGraph,
   renderCustomizedLabel,
   renderLabelContent,
@@ -34,6 +32,11 @@ const HomeTotalGraph: FC = ({}): ReactElement => {
     savingPlans
   );
 
+  const formatTooltipValue = (value: number, _name: string, _payload: any) => {
+    const proportion = (value / compounds) * 100;
+    return `(${proportion.toFixed(2)}%)`;
+  };
+
   return (
     <div className="w-full">
       <ResponsiveContainer width="100%" height={300}>
@@ -57,7 +60,7 @@ const HomeTotalGraph: FC = ({}): ReactElement => {
               content={renderLabelContent(theme, compounds)}
             />
           </Pie>
-          <Tooltip formatter={formatTooltipValue} />
+          <Tooltip formatter={formatTooltipValue} />{" "}
         </PieChart>
       </ResponsiveContainer>
 

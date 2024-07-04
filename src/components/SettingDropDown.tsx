@@ -1,12 +1,13 @@
+import { IReduxState } from "@interfaces/store.interface";
 import { logout } from "@redux/reducers/logout.reducer";
-import { useAppDispatch } from "@redux/store";
-import { authService } from "@services/api/auth/auth.service";
-import axios from "@services/axios";
+import { useAppDispatch, useAppSelector } from "@redux/store";
+import { authService } from "@services/axios";
 import { FC, ReactElement } from "react";
 import { NavigateFunction, useNavigate, Link } from "react-router-dom";
 
 const SettingDropDown: FC = (): ReactElement => {
   const navigate: NavigateFunction = useNavigate();
+  const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const dispatch = useAppDispatch();
 
   const onLogout = async (): Promise<void> => {
@@ -28,10 +29,17 @@ const SettingDropDown: FC = (): ReactElement => {
         </li>
 
         <li>
-          <Link to={""} className="block px-4 py-2 ">
+          <Link to={"/"} className="block px-4 py-2 ">
             Settings
           </Link>
         </li>
+        {authUser?.isAdmin && (
+          <li>
+            <Link to={"/admin"} className="block px-4 py-2 ">
+              Switch to admin
+            </Link>
+          </li>
+        )}
       </ul>
       <div className="py-1">
         <div

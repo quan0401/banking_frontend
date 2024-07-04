@@ -1,10 +1,8 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { savingPlanService } from "@services/api/savingPlan/savingPlan.service";
 import SavingPlansSlider from "@shared/slider/SavingPlansSlider";
-import { FC, ReactElement, useContext, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 import HomeUserSavingsView from "./home/HomeUserSavingsView";
-import { IUserSavingDocument } from "@interfaces/userSaving.interface";
-import { userSavingService } from "@services/api/userSaving/userSaving.service";
 import { IReduxState } from "@interfaces/store.interface";
 import { useAppDispatch, useAppSelector } from "@redux/store";
 import HomeTransactionsView from "./home/HomeTransactionsView";
@@ -20,7 +18,6 @@ import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { addSavingPlans } from "@redux/reducers/savingPlan.reducer";
 
 const Home: FC = (): ReactElement => {
-  const [userSavings, setUserSavings] = useState<IUserSavingDocument[]>([]);
   const [transactions, setTransactions] = useState<ITransactionDocument[]>([]);
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const location = useLocation();
@@ -35,16 +32,15 @@ const Home: FC = (): ReactElement => {
       .getAll()
       .then((res) => {
         const savingPlans: ISavingPlanDocument[] = res.data.savingPlans;
-
         dispatch(addSavingPlans({ savingPlans }));
       })
       .catch((err) => {
         console.log(err);
       });
     if (authUser?.id) {
-      userSavingService.getSavingPlans(`${authUser?.id}`).then((res) => {
-        setUserSavings(res.data.userSavings);
-      });
+      // userSavingService.getSavingPlans(`${authUser?.id}`).then((res) => {
+      //   setUserSavings(res.data.userSavings);
+      // });
       transactionService.getAllOfUser().then((res) => {
         setTransactions(res.data.transactions);
       });

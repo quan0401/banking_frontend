@@ -27,8 +27,8 @@ export const renderCustomizedLabel = (theme: string) => {
     midAngle,
     innerRadius,
     outerRadius,
-    percent,
-    index,
+    percent: _percent,
+    index: _index,
     payload,
   }: IRender) => {
     const RADIAN = Math.PI / 180;
@@ -79,22 +79,22 @@ export const renderLabelContent = (
   };
 };
 
-const renderCustomizedLabel1 = (props: any) => {
-  const { x, y, width, value } = props;
-  const radius = 25;
+// const renderCustomizedLabel1 = (props: any) => {
+//   const { x, y, width, value } = props;
+//   const radius = 25;
 
-  return (
-    <text
-      x={x + width / 2}
-      y={y - radius}
-      fill="#8884d8"
-      textAnchor="middle"
-      dominantBaseline="middle"
-    >
-      {value}
-    </text>
-  );
-};
+//   return (
+//     <text
+//       x={x + width / 2}
+//       y={y - radius}
+//       fill="#8884d8"
+//       textAnchor="middle"
+//       dominantBaseline="middle"
+//     >
+//       {value}
+//     </text>
+//   );
+// };
 
 export type ContentType = ReactElement | ((props: any) => ReactNode);
 
@@ -119,6 +119,28 @@ export const COLORS = [
   "#fc8f34",
   "#7dfc34",
 ];
+
+import seedrandom from "seedrandom";
+
+// Initialize seedrandom with a seed
+const rng = seedrandom("your-seed-string-here");
+
+const generateHexColor = () => {
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    // Generate a random hex digit using seeded RNG
+    color += Math.floor(rng() * 16).toString(16);
+  }
+  return color;
+};
+
+export const generateColorList = (numColors: number) => {
+  const colors = [];
+  for (let i = 0; i < numColors; i++) {
+    colors.push(generateHexColor());
+  }
+  return colors;
+};
 
 export const handleDataForGraph = (
   data: ITransactionDocument[],

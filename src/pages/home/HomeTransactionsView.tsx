@@ -5,6 +5,7 @@ import { FC, ReactElement, useContext, useState } from "react";
 import { FaAngleDown, FaAngleUp, FaMoneyBillTransfer } from "react-icons/fa6";
 import HomeQuickViewTransaction from "./HomeQuickViewTransaction";
 import { HomeContext } from "@contexts/homeContext";
+import Empty from "@components/Empty";
 
 const HomeTransactionsView: FC = (): ReactElement => {
   const [active, setActive] = useState<boolean>(false);
@@ -28,39 +29,43 @@ const HomeTransactionsView: FC = (): ReactElement => {
         </button>
 
         <Collapse in={active} timeout="auto" unmountOnExit>
-          <div
-            className={`submenu flex  flex-col gap-3 max-h-[500px] ${
-              active && "overflow-scroll"
-            }`}
-            style={{
-              overflowX: "hidden",
-            }}
-          >
-            {transactions.map((tran, index) => {
-              const savingPlan: ISavingPlanDocument = savingPlans.find(
-                (plan) => plan.id === tran.savingPlanId
-              ) as ISavingPlanDocument;
-              return (
-                <div key={index}>
-                  <hr
-                    className={`border-grey ${
-                      theme === "light" && "border-gray"
-                    }`}
-                  />
-                  <HomeQuickViewTransaction
-                    transaction={tran}
-                    savingPlan={savingPlan}
-                  />
+          {transactions.length > 0 ? (
+            <div
+              className={`submenu flex  flex-col gap-3 max-h-[500px] ${
+                active && "overflow-scroll"
+              }`}
+              style={{
+                overflowX: "hidden",
+              }}
+            >
+              {transactions.map((tran, index) => {
+                const savingPlan: ISavingPlanDocument = savingPlans.find(
+                  (plan) => plan.id === tran.savingPlanId
+                ) as ISavingPlanDocument;
+                return (
+                  <div key={index}>
+                    <hr
+                      className={`border-grey ${
+                        theme === "light" && "border-gray"
+                      }`}
+                    />
+                    <HomeQuickViewTransaction
+                      transaction={tran}
+                      savingPlan={savingPlan}
+                    />
 
-                  <hr
-                    className={`border-grey ${
-                      theme === "light" && "border-gray"
-                    }`}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                    <hr
+                      className={`border-grey ${
+                        theme === "light" && "border-gray"
+                      }`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <Empty />
+          )}
         </Collapse>
       </div>
     </div>

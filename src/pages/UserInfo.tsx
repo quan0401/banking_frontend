@@ -13,7 +13,7 @@ import { checkImageOrVideo, readAsBase64 } from "@utils/image-utils.service";
 import isEqual from "react-fast-compare";
 import { isAxiosError } from "axios";
 import { showErrorToast, showSuccessToast } from "@utils/utils.service";
-import { authService } from "@services/api/auth/auth.service";
+import { authService } from "@services/axios";
 import { addAuthUser } from "@redux/reducers/auth.reducer";
 
 const UserInfo: React.FC = () => {

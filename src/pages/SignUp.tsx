@@ -16,7 +16,7 @@ import { useScheme } from "@hooks/useScheme";
 import { registerUserSchema } from "@utils/schemes/auth.scheme";
 import { handleFilterError } from "@utils/utils.service";
 import { checkImageOrVideo, readAsBase64 } from "@utils/image-utils.service";
-import { authService } from "@services/api/auth/auth.service";
+import { authService } from "@services/axios";
 import { useAppSelector } from "@redux/store";
 import { IReduxState } from "@interfaces/store.interface";
 
@@ -68,9 +68,7 @@ const SignUp: FC = (): ReactElement => {
     schemaValidation();
     setShowError(true);
     if (validationErrors.length > 0) return;
-    const {
-      data: { user },
-    } = await authService.signUp(info);
+    await authService.signUp(info);
     navigate("/login");
   };
 

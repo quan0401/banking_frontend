@@ -1,6 +1,5 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { darken } from "polished";
-import { ThemeContext } from "@contexts/themeContext";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { formatLargeNumber } from "@utils/utils.service";
 

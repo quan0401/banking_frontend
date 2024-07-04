@@ -5,8 +5,8 @@ import { ITransactionDocument } from "./features/transaciontion.interface";
 export type ITheme = "dark" | "light";
 
 export interface IThemeContext {
-  theme: string;
-  toggleTheme?: () => void;
+  theme: ITheme;
+  toggleTheme?: (theme?: ITheme) => void;
 }
 
 export interface ISideBarContext {

@@ -14,12 +14,6 @@ import { ITransactionDocument } from "@interfaces/features/transaciontion.interf
 import { useEffectOnce } from "@hooks/useEffectOnce";
 import PageHeader from "@layout/PageHeader";
 
-const csvData = [
-  ["firstname", "lastname", "email"],
-  ["John", "Doe", "johndoe@domain.com"],
-  ["Jane", "Doe", "janedoe@domain.com"],
-];
-
 const headers = [
   { label: "ID", key: "id" },
   { label: "User ID", key: "userId" },
@@ -92,7 +86,7 @@ const AllUserSavings: FC = (): ReactElement => {
         <Search
           wrapperClass="lg:w-[326px]"
           placeholder="Search Product"
-          query={""}
+          query={query}
           setQuery={setQuery}
         />
         <div>

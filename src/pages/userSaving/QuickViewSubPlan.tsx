@@ -1,9 +1,6 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
-import {
-  calculateBaseOnTransactions,
-  calculateCompoundInterestToCurrentDate,
-} from "@utils/calculator.service";
+import { calculateBaseOnTransactions } from "@utils/calculator.service";
 import { TimeAgo } from "@utils/timeago.utils";
 import { formatLargeNumber } from "@utils/utils.service";
 import { FC, ReactElement, useState } from "react";

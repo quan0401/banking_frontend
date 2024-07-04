@@ -1,4 +1,5 @@
 export interface ISavingPlanDocument {
+  [key: string]: any;
   id?: string;
   termPeriod?: number;
   minimumBalance?: number;
