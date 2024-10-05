@@ -6,7 +6,7 @@ const headerReducer: Slice = createSlice({
   name: "header",
   initialState: initialValue,
   reducers: {
-    toggleHeader: (state: boolean, action): boolean => {
+    toggleHeader: (_: boolean, action): boolean => {
       return action.payload;
     },
   },

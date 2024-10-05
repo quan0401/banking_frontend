@@ -14,15 +14,19 @@ export default defineConfig({
     }),
     tsconfigPaths(), // dont need to specify paths in tsconfig into this, since this will read from tsconfig already
   ],
-  // resolve: {
-  //   alias: {
-  //     src: '/src'
-  //   }
-  // },
+  resolve: {
+    alias: {
+      src: "/src",
+    },
+  },
   build: {
     outDir: "./build",
   },
+  // server: {
+  //   port: 3002,
+  // },
   server: {
     port: 3002,
+    host: "0.0.0.0",
   },
 });

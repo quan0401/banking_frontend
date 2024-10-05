@@ -1,4 +1,5 @@
 export interface ISavingPlanDocument {
+  [key: string]: any;
   id?: string;
   termPeriod?: number;
   minimumBalance?: number;
@@ -23,4 +24,11 @@ export interface ISavingPlanCardItems {
   savingPlan: ISavingPlanDocument;
   linkTarget: boolean;
   showEditIcon: boolean;
+}
+
+export interface IReduxAddSavingPlan {
+  type?: string;
+  payload: {
+    savingPlans?: ISavingPlanDocument[];
+  };
 }

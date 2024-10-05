@@ -1,9 +1,9 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { FC, ReactElement, useEffect, useRef, useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FC, ReactElement, useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import SavingPlanCardDisplayItem from "./SavingPlanDisplayItem";
+import { HomeContext } from "@contexts/homeContext";
 
 interface IScrollProps {
   atStart: boolean;
@@ -11,7 +11,6 @@ interface IScrollProps {
 }
 
 export interface ISavingPlansSliderProps {
-  savingPlans: ISavingPlanDocument[];
   title: string;
   subTitle: string;
   category?: string;
@@ -19,12 +18,12 @@ export interface ISavingPlansSliderProps {
 }
 
 const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
-  savingPlans,
   title,
   subTitle,
   category,
   type,
 }): ReactElement => {
+  const { savingPlans } = useContext(HomeContext);
   const navElement = useRef<HTMLDivElement | null>(null);
   const [scroll, setScroll] = useState<IScrollProps>({
     atStart: true,
@@ -56,38 +55,38 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
     }
   };
 
-  const slideLeft = () => {
-    if (!navElement.current) return;
-    const currentScrollPos = navElement.current.scrollLeft;
-    const newScrollPos =
-      currentScrollPos - 500 > 0 ? currentScrollPos - 500 : 0;
-    navElement.current.scrollTo({
-      left: newScrollPos,
-      behavior: "smooth",
-    });
-    setScroll({
-      atStart: newScrollPos === 0,
-      atEnd: false,
-    });
-  };
-  const slideRight = () => {
-    if (!navElement.current) return;
-    const currentScrollPos = navElement.current.scrollLeft;
-    const maxScrollWidth =
-      navElement.current.scrollWidth - navElement.current.clientWidth;
-    const newScrollPos =
-      currentScrollPos + 500 < maxScrollWidth
-        ? currentScrollPos + 500
-        : maxScrollWidth;
-    navElement.current.scrollTo({
-      left: newScrollPos,
-      behavior: "smooth",
-    });
-    setScroll({
-      atStart: false,
-      atEnd: newScrollPos === maxScrollWidth,
-    });
-  };
+  // const slideLeft = () => {
+  //   if (!navElement.current) return;
+  //   const currentScrollPos = navElement.current.scrollLeft;
+  //   const newScrollPos =
+  //     currentScrollPos - 500 > 0 ? currentScrollPos - 500 : 0;
+  //   navElement.current.scrollTo({
+  //     left: newScrollPos,
+  //     behavior: "smooth",
+  //   });
+  //   setScroll({
+  //     atStart: newScrollPos === 0,
+  //     atEnd: false,
+  //   });
+  // };
+  // const slideRight = () => {
+  //   if (!navElement.current) return;
+  //   const currentScrollPos = navElement.current.scrollLeft;
+  //   const maxScrollWidth =
+  //     navElement.current.scrollWidth - navElement.current.clientWidth;
+  //   const newScrollPos =
+  //     currentScrollPos + 500 < maxScrollWidth
+  //       ? currentScrollPos + 500
+  //       : maxScrollWidth;
+  //   navElement.current.scrollTo({
+  //     left: newScrollPos,
+  //     behavior: "smooth",
+  //   });
+  //   setScroll({
+  //     atStart: false,
+  //     atEnd: newScrollPos === maxScrollWidth,
+  //   });
+  // };
 
   return (
     <div className="mx-auto mb-8 flex flex-col overflow-hidden rounded-lg">
@@ -118,14 +117,14 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
         onScroll={handleOnScroll}
         ref={navElement}
       >
-        {!scroll.atStart && savingPlans.length > 2 && (
+        {/* {!scroll.atStart && savingPlans.length > 2 && (
           <span
             onClick={slideLeft}
             className="absolute left-2 z-50 flex cursor-pointer justify-start self-center rounded-full bg-sky-400 sm:left-3 md:left-7 lg:left-0"
           >
             <FaAngleLeft className="text-3xl text-white sm:text-3xl md:text-4xl lg:text-4xl" />
           </span>
-        )}
+        )} */}
         <div className="relative flex gap-x-8 pt-3">
           {savingPlans.map((savingPlan: ISavingPlanDocument) => (
             <div key={uuidv4()} className="hover:opacity-80">
@@ -142,14 +141,14 @@ const SavingPlansSlider: FC<ISavingPlansSliderProps> = ({
           ))}
         </div>
 
-        {!scroll.atEnd && scroll.atStart && savingPlans.length > 2 && (
+        {/* {!scroll.atEnd && scroll.atStart && savingPlans.length > 2 && (
           <span
             onClick={slideRight}
             className="absolute right-2 flex max-w-4xl cursor-pointer justify-end self-center rounded-full bg-sky-400 sm:right-3 md:right-7 lg:right-0"
           >
             <FaAngleRight className="text-3xl text-white sm:text-3xl md:text-4xl lg:text-4xl" />
           </span>
-        )}
+        )} */}
       </div>
     </div>
   );

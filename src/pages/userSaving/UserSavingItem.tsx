@@ -1,13 +1,12 @@
 import Spring from "@components/Spring";
 import { NavLink } from "react-router-dom";
-import RatingStars from "@ui/RatingStars";
-import { useTheme } from "@contexts/themeContext";
 import { FC, ReactElement } from "react";
 import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { formatLargeNumber } from "@utils/utils.service";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
 import { calculateBaseOnTransactions } from "@utils/calculator.service";
+import SavingPlanCard from "@components/SavingPlanCard";
 
 interface ISellerListItemProps {
   userSaving: IUserSavingDocument;
@@ -31,8 +30,8 @@ const UserSavingItem: FC<ISellerListItemProps> = ({
     >
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_,minmax(0,240px)] lg:gap-[26px]">
         <div className="flex flex-col flex-1 gap-5 md:flex-row md:gap-[26px]">
-          <div className="flex flex-col shrink-0 gap-5 w-[193px]">
-            <img className="object-contain" src={savingPlan.image} />
+          <div className="flex flex-col shrink-0 gap-5">
+            <SavingPlanCard savingPlan={savingPlan} />
           </div>
           <div>
             <h3 className="truncate max-w-[220px] xs:max-w-[260px] md:max-w-full xl:max-w-[218px] my-3">
@@ -83,7 +82,7 @@ const UserSavingItem: FC<ISellerListItemProps> = ({
             className="btn btn--primary"
             to={`/userSaving/${savingPlan?.id}`}
           >
-            See in details
+            View details
           </NavLink>
           <NavLink
             className="btn btn--primary lg:mt-10 !bg-blue-400 !border-0 hover:!bg-blue-500"

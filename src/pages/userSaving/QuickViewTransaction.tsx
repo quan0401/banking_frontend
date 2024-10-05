@@ -1,6 +1,5 @@
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { ITransactionDocument } from "@interfaces/features/transaciontion.interface";
-import { IUserSavingDocument } from "@interfaces/userSaving.interface";
 import { TimeAgo } from "@utils/timeago.utils";
 import { formatLargeNumber } from "@utils/utils.service";
 import { FC, ReactElement, useState } from "react";
@@ -39,12 +38,12 @@ const QuickViewTransaction: FC<IQuickViewTransactionProps> = ({
 
         <div className="flex items-center">
           <div>
-            <p className="font-bold text-lg flex items-center">
+            <p className="font-bold text-lg flex items-center justify-end">
               <span>{transaction.transactionType === 1 ? `+` : "-"}</span>
               <span>{formatLargeNumber(transaction.amount as number)}</span>
             </p>
             <p
-              className={`line-clamp-1 text-gray font-semibold line-clamp-1 ${
+              className={`line-clamp-1 text-gray font-semibold text-end ${
                 transaction.isSuccessful === 1 ? "text-green" : "text-rose-400"
               }`}
             >

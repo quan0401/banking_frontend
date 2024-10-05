@@ -1,7 +1,6 @@
 // components
 import Tooltip from "@mui/material/Tooltip";
-import Fade from "@mui/material/Fade";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ICustomToolTip } from "@interfaces/shared.interface";
 
 const CustomTooltip: FC<ICustomToolTip> = ({

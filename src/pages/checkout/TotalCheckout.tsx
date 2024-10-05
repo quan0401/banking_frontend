@@ -1,13 +1,7 @@
 import { PaymentContext } from "@contexts/paymentContext";
 import { formatLargeNumber } from "@utils/utils.service";
 import { FC, ReactElement, useContext } from "react";
-import {
-  FaCartPlus,
-  FaDollarSign,
-  FaFedex,
-  FaMoneyBill,
-  FaSortAmountDown,
-} from "react-icons/fa";
+import { FaCartPlus, FaDollarSign } from "react-icons/fa";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 const TotalCheckout: FC = (): ReactElement => {

@@ -1,20 +1,13 @@
-import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
 interface IHomeProps {
-  savingPlans: ISavingPlanDocument[];
   title: string;
   subTitle: string;
   category?: string;
 }
 
-const HomeUserSavingsView: FC<IHomeProps> = ({
-  savingPlans,
-  title,
-  subTitle,
-  category,
-}) => {
+const HomeUserSavingsView: FC<IHomeProps> = ({ title, category }) => {
   return (
     <div className="border-grey mx-auto my-8 flex flex-col overflow-hidden rounded-lg border">
       <div className="flex items-center px-6 py-6 sm:items-start">
@@ -29,7 +22,7 @@ const HomeUserSavingsView: FC<IHomeProps> = ({
               </span>
             )}
           </div>
-          <h4 className="pt-1 text-center text-sm sm:text-left">{subTitle}</h4>
+          {/* <h4 className="pt-1 text-center text-sm sm:text-left">{subTitle}</h4> */}
         </div>
       </div>
       <div className="flex w-full flex-nowrap items-center justify-center overflow-x-hidden px-6 md:overflow-x-auto lg:overflow-x-hidden">

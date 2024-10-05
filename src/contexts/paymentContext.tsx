@@ -1,6 +1,6 @@
 import { IPaymentContext } from "@interfaces/contexts.interface";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
-import { Context, createContext, Dispatch, SetStateAction } from "react";
+import { Context, createContext } from "react";
 
 export const PaymentContext: Context<IPaymentContext> =
   createContext<IPaymentContext>({

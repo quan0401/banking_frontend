@@ -20,6 +20,7 @@ import {
 } from "redux-persist";
 import logoutReducer from "./reducers/logout.reducer";
 import headerReducer from "./reducers/header.reducer";
+import savingPlanReducer from "./reducers/savingPlan.reducer";
 
 const persistConfig = {
   key: "root",
@@ -30,6 +31,7 @@ const combined: Reducer = combineReducers({
   authUser: authReducer,
   logout: logoutReducer,
   header: headerReducer,
+  savingPlans: savingPlanReducer,
 });
 
 export const rootReducers: Reducer<RootState> = (state, action) => {

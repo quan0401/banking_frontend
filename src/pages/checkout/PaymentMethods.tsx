@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from "react";
 import { FaRegCircle } from "react-icons/fa";
-import visa from "@assets/visa.png";
-import momo from "@assets/momo.png";
-import atm from "@assets/atm.png";
+import visaImage from "@assets/visa.png";
+import momoImage from "@assets/momo.png"; // Renamed import
+import atmImage from "@assets/atm.png";
 import { FaCircleCheck } from "react-icons/fa6";
 import { IPaymentMethods } from "@interfaces/contexts.interface";
 
@@ -17,14 +17,16 @@ const PaymentMethods: FC<IPaymentMethodsProps> = ({
 }): ReactElement => {
   const selectPaymentMethod = (method: string) => {
     if (method !== "momo") return;
-    if (setPaymentMethod)
-      setPaymentMethod({
-        momo: false,
-        atm: false,
-        visa: false,
-        // @ts-ignore
-        [method]: true,
-      });
+    const newPaymentMethod: IPaymentMethods = {
+      momo: false,
+      atm: false,
+      visa: false,
+    };
+    // Assuming IPaymentMethods is a type that can have boolean properties for momo, atm, and visa
+    newPaymentMethod[method] = true; // Dynamically setting the property based on the method
+    if (setPaymentMethod) {
+      setPaymentMethod(newPaymentMethod);
+    }
   };
   return (
     <div className="flex rounded-[4px]  px-4 py-3">
@@ -35,7 +37,8 @@ const PaymentMethods: FC<IPaymentMethodsProps> = ({
         <div className="flex gap-4">
           <div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full">
-              <img src={momo} alt="" className="rounded" />
+              <img src={momoImage} alt="" className="rounded" />{" "}
+              {/* Updated usage */}
             </div>
           </div>
           <div
@@ -52,7 +55,8 @@ const PaymentMethods: FC<IPaymentMethodsProps> = ({
         <div className="flex gap-4 pt-4 opacity-40 cursor-not-allowed">
           <div>
             <div className="flex h-12 w-12 items-center justify-center rounded-full">
-              <img src={atm} alt="" className="rounded" />
+              <img src={atmImage} alt="" className="rounded" />{" "}
+              {/* Updated usage */}
             </div>
           </div>
           <div className="w-full" onClick={() => selectPaymentMethod("atm")}>
@@ -66,7 +70,8 @@ const PaymentMethods: FC<IPaymentMethodsProps> = ({
         <div className="flex gap-4 pt-4 opacity-40 cursor-not-allowed">
           <div>
             <div className="flex h-12 w-12 items-center justify-center  bg-white">
-              <img src={visa} alt="" className="rounded" />
+              <img src={visaImage} alt="" className="rounded" />{" "}
+              {/* Updated usage */}
             </div>
           </div>
           <div className="w-full" onClick={() => selectPaymentMethod("visa")}>

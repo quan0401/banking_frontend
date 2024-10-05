@@ -1,10 +1,10 @@
 import { ISearchProps } from "@interfaces/components.interface";
 import Button from "@shared/button/Button";
 import TextInput from "@shared/inputs/TextInput";
-import PropTypes from "prop-types";
 import { FC, ReactElement } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Search: FC<ISearchProps> = ({
   placeholder = "Search...",
@@ -12,6 +12,9 @@ const Search: FC<ISearchProps> = ({
   setQuery,
   wrapperClass,
 }): ReactElement => {
+  const currentUrlParams = new URLSearchParams(window.location.search);
+  const navigate = useNavigate(); // Updated to useNavigate
+
   return (
     <div className={`relative ${wrapperClass || ""}`}>
       <TextInput
@@ -19,7 +22,13 @@ const Search: FC<ISearchProps> = ({
         type="search"
         placeholder={placeholder}
         value={query}
-        onChange={(e) => setQuery((e.target as HTMLInputElement).value)}
+        onChange={(e) => {
+          currentUrlParams.set("query", (e.target as HTMLInputElement).value);
+          setQuery((e.target as HTMLInputElement).value);
+          navigate(
+            `${window.location.pathname}?${currentUrlParams.toString()}`
+          ); // Updated to use navigate
+        }}
       />
       <Button
         className={`field-btn text-red !right-[40px] transition ${

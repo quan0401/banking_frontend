@@ -1,7 +1,6 @@
-import { PaymentContext } from "@contexts/paymentContext";
 import { ISavingPlanDocument } from "@interfaces/features/savingPlan.interface";
 import { formatLargeNumber } from "@utils/utils.service";
-import { FC, ReactElement, useContext } from "react";
+import { FC, ReactElement } from "react";
 import {
   FaCartPlus,
   FaMoneyBill,
@@ -23,6 +22,18 @@ const SavingPlanFeatures: FC<ISavingPlanFeaturesProps> = ({
       <h3 className="mb-6">Features</h3>
 
       <div className="grid  grid-cols-2 gap-y-4 ">
+        <div className="flex flex-col">
+          <span className="text-[#95979d] flex items-center">
+            <FaCartPlus size={20} className="mr-1" />
+            Title
+          </span>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex flex-col">
+            <span className="font-normal">{savingPlan.title}</span>
+          </div>
+        </div>
+
         <div className="flex flex-col">
           <span className="text-[#95979d] flex items-center">
             <FaCartPlus size={20} className="mr-1" />

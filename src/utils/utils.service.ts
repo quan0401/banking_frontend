@@ -19,6 +19,19 @@ export const firstLetterUppercase = (str: string): string => {
     .toLowerCase()}`;
 };
 
+export const formatCamelCaseToTitle = (camelCaseString: string): string => {
+  // Split the string at each point a capital letter appears
+  const words = camelCaseString.split(/(?=[A-Z])/);
+
+  // Convert the first letter of each word to uppercase and the rest to lowercase
+  const formattedWords = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  );
+
+  // Join the words back together with a space
+  return formattedWords.join(" ");
+};
+
 export const replaceSpacesWithDash = (title: string): string => {
   const lowercaseTitle: string = lowerCase(`${title}`);
   return lowercaseTitle.replace(/\/| /g, "-"); // replace / and space with -
@@ -133,12 +146,15 @@ export const monthList = (): string[] => {
   ];
 };
 
-export const shortenLargeNumbers = (data: number | undefined): string => {
+export const shortenLargeNumbers = (
+  data: number | undefined,
+  precision: number = 0
+): string => {
   if (data === undefined) {
     return "0";
   }
   // 100,000,000 => 100M
-  return millify(data, { precision: 0 });
+  return millify(data, { precision });
 };
 
 export const formatLargeNumber = (number: number) => {
@@ -229,8 +245,17 @@ export const showErrorToast = (message: string): void => {
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
-    theme: "error",
+    theme: "light",
   });
+};
+
+export const isValidUrl = (string: string): boolean => {
+  try {
+    new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return true;
 };
 
 export const reactQuillUtils = () => {

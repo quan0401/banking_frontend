@@ -10,7 +10,7 @@ export interface IAuthDocument {
   cccd?: string;
   homeAddress?: string;
   profilePicture?: string;
-  emailVerified?: number;
+  emailVerified?: number | boolean;
   emailVerificationToken?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -31,6 +31,14 @@ export interface ISignUpBody {
   cccd: string;
   homeAddress: string;
   profilePicture: string;
+}
+
+export interface IUpdateProfileBody {
+  username?: string;
+  phone?: string;
+  homeAddress?: string;
+  profilePicture?: string;
+  cccd?: string;
 }
 
 export interface IResetPassword {

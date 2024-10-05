@@ -1,6 +1,6 @@
 import Login from "@pages/Login";
-import { FC, ReactElement, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { FC, ReactElement, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 // styles
 import { ThemeProvider } from "styled-components";
@@ -10,28 +10,57 @@ import { useTheme } from "@contexts/themeContext";
 import AppBar from "@layout/AppBar";
 import { useWindowSize } from "react-use";
 import SideBar from "@layout/sidebar/SideBar";
-import { useSidebar } from "@contexts/sidebarContext";
 import Home from "@pages/Home";
 import ProtectedRoute from "@pages/ProtectedRoute";
 import SavingPlanView from "@pages/SavingPlanView";
 import SignUp from "@pages/SignUp";
 import UserInfo from "@pages/UserInfo";
-import { useAppSelector } from "@redux/store";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 import { IReduxState } from "@interfaces/store.interface";
 import Checkout from "@pages/Checkout";
 import { ToastContainer } from "react-toastify";
-import { showSuccessToast } from "@utils/utils.service";
 import "react-toastify/dist/ReactToastify.css";
 import UserSavingView from "@pages/UserSavingView";
 import AllUserSavings from "@pages/AllUserSavings";
+import PageNotFound from "@components/PageNotFound";
+import AdminCreateSavingPlan from "@pages/adminPages/AdminCreateSavingPlan";
+import "react-datepicker/dist/react-datepicker.css";
+
+import AdminDashboard from "@pages/adminPages/AdminDashBoard";
+import { setNavigateFunction, setDispatchFunction } from "@services/axios";
+import AdminViewUser from "@pages/adminPages/AdminViewUser";
+
+const adminRoutes = [
+  {
+    path: "/admin/create-saving-plan",
+    Element: <AdminCreateSavingPlan />,
+  },
+  {
+    path: "/admin",
+    Element: <AdminDashboard />,
+  },
+  {
+    path: "/admin/dashboard",
+    Element: <AdminCreateSavingPlan />,
+  },
+  {
+    path: "/admin/view/user/:userId",
+    Element: <AdminViewUser />,
+  },
+];
 
 const App: FC = (): ReactElement => {
   const { width } = useWindowSize();
   const withHeader = useAppSelector((state: IReduxState) => state.header);
-
   const { theme } = useTheme();
-  const { setOpen } = useSidebar();
 
+  // for logout out of the function
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    setNavigateFunction(navigate);
+    setDispatchFunction(dispatch);
+  }, [navigate, dispatch]);
   return (
     <ThemeProvider theme={{ theme: theme }}>
       <ThemeStyles />
@@ -94,6 +123,15 @@ const App: FC = (): ReactElement => {
                   </ProtectedRoute>
                 }
               />
+              {adminRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={<ProtectedRoute>{route.Element}</ProtectedRoute>}
+                />
+              ))}
+
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </div>
         </div>
